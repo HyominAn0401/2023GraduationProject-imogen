@@ -47,45 +47,49 @@
                 </div>
             </div>
 
-            <form action="" method="post">
+            <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class = "content">
                     <div>
                         <h2 class = "title2" >Upload Content image</h2>
                     </div>
-                    <div class="contents">
-                        <div class="upload-box">
-                            <div id="drop-file" class="drag-file">
-                                <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
-                                <p class="message">Drag files to upload</p>
-                                <img src="" alt="미리보기 이미지" class="preview">
-                            </div>
-                            <label class="file-label" for="chooseFile">Choose File</label>
-                            <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg">
-                        </div>
                         
-                        <div class="container">
-                            <div class="cards">
-                                <label class="card">
-                                    <input type="radio" name="image-card" value="00.png">
-                                    <img class="thumnail" src="img/c1.png" alt="" />
-                                </label>
-                                <label class="card">
-                                    <input type="radio" name="image-card" value="01.png">
-                                    <img class="thumnail" src="img/c2.png" alt="" />
-                                </label>
-                                
-                                <label class="card">
-                                    <input type="radio" name="image-card" value="02.png">
-                                    <img class="thumnail" src="img/c3.png" alt="" />
-                                </label>
-                                <label class="card">
-                                    <input type="radio" name="image-card" value="03.png">
-                                    <img class="thumnail" src="img/c4.png" alt="" />
-                                </label>
+                        <div class="contents">
+                            <div class="upload-box">
+                                <div id="drop-file" class="drag-file">
+                                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
+                                    <p class="message">Drag files to upload</p>
+                                    <img src="" alt="미리보기 이미지" class="preview">
+                                </div>
+                                <label class="file-label" for="chooseFile">Choose File</label>
+                                <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg" required>
+                            </div>
+                        
+                            
+                            <div class="container">
+                                <div class="cards">
+                                    <label class="card">
+                                        <input type="radio" name="image-card" value="00.png">
+                                        <img class="thumnail" src="img/c1.png" alt="" />
+                                    </label>
+                                    <label class="card">
+                                        <input type="radio" name="image-card" value="01.png">
+                                        <img class="thumnail" src="img/c2.png" alt="" />
+                                    </label>
+                                    
+                                    <label class="card">
+                                        <input type="radio" name="image-card" value="02.png">
+                                        <img class="thumnail" src="img/c3.png" alt="" />
+                                    </label>
+                                    <label class="card">
+                                        <input type="radio" name="image-card" value="03.png">
+                                        <img class="thumnail" src="img/c4.png" alt="" />
+                                    </label>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
                 
                 
@@ -102,7 +106,7 @@
                                 <img src="" alt="미리보기 이미지" class="preview">
                             </div>
                             <label class="file-label" for="chooseFile2">Choose File</label>
-                            <input class="file" id="chooseFile2" type="file" onchange="dropFile2.handleFiles(this.files)" accept="image/gif, video/mp4">
+                            <input class="file" id="chooseFile2" type="file" onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg" required>
                         </div>
                         <div class="container">
                             <div class="cards">
@@ -221,7 +225,7 @@
                     <div class="generate" style="text-align: center; margin-top: 100px;">
                         <input type="submit" class="button-generate" value="Generate!">
                     </div>
-</form>
+                </form>
 
             <div class="result">
                 <h2 class = "title2">Result</h2>
