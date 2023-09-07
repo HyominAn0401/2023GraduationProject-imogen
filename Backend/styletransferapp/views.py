@@ -48,3 +48,7 @@ def upload_image(request):
             return HttpResponse(f'Style transfer completed. <a href="{generated_image_model.generated_image.url}">View Result</a>')
 
     return render(request, 'upload_image.html')
+
+def stylegen(request):
+    return render(request, 'stylegen.html')
+
