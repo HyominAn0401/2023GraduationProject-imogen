@@ -97,7 +97,6 @@ footer #copyright{
     line-height: 150px;
     font-size:40px; font-weight: bold;
     padding-bottom:0px;
-
     margin-bottom:5px;
     color:#262A2D
 }
@@ -192,7 +191,7 @@ hr.line1{
 
 /*Generate button*/
 .button-generate{
-    width:800px;
+    width:100%;
     height:50px;
     background-color:#262A2D;
     color:#ffffff;
@@ -260,10 +259,10 @@ hr.line1{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 3px dashed #dbdbdb;
+    border: 3px dashed #E7E3E3;
   }
   .contents .upload-box .drag-file.highlight {
-    border: 3px dashed red;
+    border: 3px dashed #B4C8BB;
   }
   .contents .upload-box .drag-file .image {
     width: 40px;
@@ -314,3 +313,210 @@ hr.line1{
       overflow: initial;
     }
   }
+
+/* imagen*/
+
+  /*프롬프트*/
+  #comments{
+    margin-top:200px;
+  }
+  .comment-head{
+      font-size:25px;
+      color: #262A2D;
+      font-family: "Noto Sans KR";
+      padding:0px;
+  }
+  #comments-count{
+      font: size 25px;
+      color :#B4C8BB;
+  }
+  .textarea{
+      width: 755px;
+      height : 25px;
+      resize:none;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #E7E3E3;
+      font-family: "Noto Sans KR"; font-size:16px; color:#262A2D;
+  }
+  ::placeholder{
+    color:#E7E3E3;
+}
+
+/*드롭다운
+.select{
+  width: 150px;
+  height: 25px;
+  font-size: 25px;
+}
+
+.image-container{
+  width: 100px
+}*/
+
+/*image editor*/
+.container2{
+  width: 850px;
+  height: 1000px;
+  padding: 30px 35px 35px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.container2.disable .editor-panel,
+.container2.disable .controls .reset-filter,
+.container2.disable .controls .save-img{
+  opacity: 0.5;
+  pointer-events: none;
+}
+.container2 h2{
+  margin-top: -8px;
+  font-size: 22px;
+  font-weight: 500;
+}
+.container2 .wrapper-imgeditor{
+  /*display: flex;*/
+  position:relative;
+  float: left;
+  margin: 20px 0;
+  min-height: 335px;
+}
+.wrapper-imgeditor .editor-panel{
+  padding: 15px 20px;
+  width: 280px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.editor-panel .title3{
+  display: block;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+.editor-panel .options, .controls{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.editor-panel button{
+  outline: none;
+  height: 40px;
+  font-size: 14px;
+  color: #6C757D;
+  background: #fff;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  border: 1px solid #aaa;
+}
+.editor-panel .filter button{
+  width: calc(100% / 2 - 4px);
+}
+.editor-panel button:hover{
+  background: #f5f5f5;
+}
+.filter button.active{
+  color: #fff;
+  border-color: #B4C8BB;
+  background: #B4C8BB;
+}
+.filter .slider{
+  margin-top: 12px;
+}
+.filter .slider .filter-info{
+  display: flex;
+  color: #464646;
+  font-size: 14px;
+  justify-content: space-between;
+}
+.filter .slider input{
+  width: 100%;
+  height: 5px;
+  accent-color: #B4C8BB;
+}
+
+.rotate .options button:active{
+  color: #fff;
+  background: #B4C8BB;
+  border-color: #B4C8BB;
+}
+.wrapper-imgeditor .preview-img{
+  /*flex-grow: 1;
+  
+  display: flex;*/
+  overflow: hidden;
+  margin-left: 20px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.preview-img img{
+  max-width: 490px;
+  max-height: 335px;
+  width: 100%;
+  height: 100%;
+  /*object-fit: contain;*/
+}
+.controls button{
+  padding: 11px 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.controls .reset-filter{
+  color: #6C757D;
+  border: 1px solid #6C757D;
+}
+.controls .reset-filter:hover{
+  color: #fff;
+  background: #6C757D;
+}
+.controls .choose-img{
+  background: #6C757D;
+  border: 1px solid #6C757D;
+}
+.controls .save-img{
+  margin-left: 5px;
+  background: #B4C8BB;
+  border: 1px solid #B4C8BB;
+}
+@media screen and (max-width: 760px) {
+  .container{
+    padding: 25px;
+  }
+  .container .wrapper-imgeditor{
+    flex-wrap: wrap-reverse;
+  }
+  .wrapper-imgeditor .editor-panel{
+    width: 100%;
+  }
+  .wrapper-imgeditor .preview-img{
+    width: 100%;
+    margin: 0 0 15px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .controls button{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .controls .row{
+    width: 100%;
+  }
+  .controls .row .save-img{
+    margin-left: 0px;
+  }
+}
+
+/*cropper*/
+img{
+  display: block;
+
+  max-width:100%
+}
+#output {
+  margin: 5px;
+}
