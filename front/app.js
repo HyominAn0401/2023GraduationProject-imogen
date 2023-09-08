@@ -5,34 +5,70 @@ function goToScroll(name) {
 
 /*crop image*/
 //import Cropper from 'cropperjs';
-
-var image = document.getElementById('image');
-const cropper = new Cropper(image, {
+// var image = document.getElementById('image');
+// const cropper = new Cropper(image, {
+// //   aspectRatio: 3/4,
+// //   viewMode:0,
+//   dragMode: 'move',
 //   aspectRatio: 3/4,
-//   viewMode:0,
-  dragMode: 'move',
-  aspectRatio: 3/4,
-  autoCropArea: 0.8,
-  restore: false,
-  guides: false,
-  center: false,
-  highlight: false,
-  //zoomable: false,
-//   cropBoxMovable: false,
-//   cropBoxResizable: false,
-  toggleDragModeOnDblclick: false,
+//   autoCropArea: 0.8,
+//   restore: false,
+//   guides: false,
+//   center: false,
+//   highlight: false,
+//   //zoomable: false,
+// //   cropBoxMovable: false,
+// //   cropBoxResizable: false,
+//   toggleDragModeOnDblclick: false,
 
-  crop(event) {
-    console.log(event.detail.x);
-    console.log(event.detail.y);
-    console.log(event.detail.width);
-    console.log(event.detail.height);
-    console.log(event.detail.rotate);
-    console.log(event.detail.scaleX);
-    console.log(event.detail.scaleY);
-  },
+//   crop(event) {
+//     console.log(event.detail.x);
+//     console.log(event.detail.y);
+//     console.log(event.detail.width);
+//     console.log(event.detail.height);
+//     console.log(event.detail.rotate);
+//     console.log(event.detail.scaleX);
+//     console.log(event.detail.scaleY);
+//   },
 
-});
+// });
+
+// 임의의 버튼 + cropper 만들기
+var imgurl= "https://cdn.aitimes.kr/news/photo/202303/27617_41603_044.jpg"
+const tempBtn = document.getElementById("#button-temp")
+var imageTemp = document.getElementById('#imageTemp');
+
+const changeImg = () => {
+    
+    //특정 img src를 가지는 cropper 객체 생성
+    let cropperTemp = new Cropper(imageTemp,{
+        dragMode: 'move',
+        aspectRatio: 3/4,
+        autoCropArea: 0.8,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        toggleDragModeOnDblclick: false,
+
+        crop(event) {
+            console.log(event.detail.x);
+            console.log(event.detail.y);
+            console.log(event.detail.width);
+            console.log(event.detail.height);
+            console.log(event.detail.rotate);
+            console.log(event.detail.scaleX);
+            console.log(event.detail.scaleY);
+            },
+            
+    });
+    console.log("cropper 실행됨")
+    cropperTemp.replace(imgurl)
+}
+window.onload = function(){
+    tempBtn.addEventListener("click", changeImg);
+}
+
 
 
 /*crop 비율 바꾸기*/
