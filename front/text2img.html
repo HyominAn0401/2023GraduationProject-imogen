@@ -70,15 +70,15 @@
                     <div class="frame-buttons">
                         <div class="phoneframe" style="margin-bottom: 30px;">
                             <label class = "button2">
-                                <input type="radio" name = "frame-size" value="390x844">
+                                <input type="radio" name = "frame-size" value="1170x2532">
                                 <span>iPhone 14</span>
                             </label>
                             <label class = "button2">
-                                <input type="radio" name = "frame-size" value="393x852">
+                                <input type="radio" name = "frame-size" value="1179x2556">
                                 <span>iPhone 14 Pro</span>
                             </label>
                             <label class = "button2">
-                                <input type="radio" name = "frame-size" value="428x926">
+                                <input type="radio" name = "frame-size" value="1284x2778">
                                 <span>iPhone 14 Plus</span>
                             </label>
                             <label class = "button2">
@@ -160,11 +160,21 @@
                 <button id="button-temp" type="button" onclick="">Creat cropper</button>
 
                 <div class="container-cropper">
+                    <button id="createButton">이미지 생성 및 크롭</button>
                     <div>
+                        <img id="generatedImage" src="" alt="생성된 이미지">
+                    </div>
+                    <div>
+<<<<<<< Updated upstream
                         <img id="imageTemp" src="./img/0.png">
                         <button id="cropImageBtn">Crop Image</button>
+=======
+                        <canvas id="croppedCanvas"></canvas>
+>>>>>>> Stashed changes
                     </div>
-                    <img src="" id="output">
+                    
+                    <button id="cropButton">Crop</button>
+                    
                 </div>
         
                 <div class="container2 disable">
@@ -203,8 +213,60 @@
                 </div>
             </section>
             
+<<<<<<< Updated upstream
             <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js" integrity="sha512-q9N9RDpXWA3HKu2spOTpZ0j64hL0kfwHQiCgGq9FUuVtTOn7K894cu3YQBtA6rz8T7gbAyuBo+sooxR+/sO4Lg==" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
             <script type = "text/javascript" src="app.js" async></script>
+=======
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.min.js"></script>
+            <script type = "text/javascript" src="app.js">
+                
+
+
+/*
+                function warnEmpty(){
+                    alert("Enter a Input");
+                }
+                function dateToString(date){
+                    //const dateString=date
+                    const dateString=date.toISOString();
+                    const dateToString=dateString.substring(0,10) + " " + dateString.substring(11,19);
+                    return dateToString;
+                }
+
+                function submitComment(){
+                    const newcommentEL = document.getElementById("new-comment");
+                    const newcomment = newcommentEL.value.trim(); //양끝에서 공백을 삭제
+
+                    if(newcomment) {
+                        const tzoffset = new Date().getTimezoneOffset()*60000;
+                        const dateEL = document.createElement('div');//div 요소 만들고 dateEL에 저장
+                        dateEL.classList.add("comment-date");
+                        var a = new Date(Date.now()-tzoffset);
+                        const dateString = dateToString(a);
+                        dateEL.innerText = dateString;
+
+                        const contentEL=document.createElement('div');
+                        contentEL.classList.add('comment-content');
+                        contentEL.innerText=newcomment;
+
+                        const commentEL = document.createElement('div');
+                        commentEL.classList.add('comment-row');
+                        commentEL.appendChild(dateEL);
+                        commentEL.appendChild(contentEL);
+                        
+
+                        document.getElementById('comments').appendChild(commentEL);
+                        newcommentEL.value="";
+
+                        const countEL=document.getElementById("comments-count");
+                        const count = countEL.innerText;
+                        countEL.innerText = parseInt(count) + 1;
+                    }
+                    else warnEmpty();
+                }
+*/
+            </script>
+>>>>>>> Stashed changes
             
                 <footer>
                     <div id="copyright">

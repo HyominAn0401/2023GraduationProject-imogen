@@ -5,6 +5,10 @@ function goToScroll(name) {
 
 /*crop image*/
 //import Cropper from 'cropperjs';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // var image = document.getElementById('image');
 // const cropper = new Cropper(image, {
 // //   aspectRatio: 3/4,
@@ -20,6 +24,7 @@ function goToScroll(name) {
 // //   cropBoxMovable: false,
 // //   cropBoxResizable: false,
 //   toggleDragModeOnDblclick: false,
+<<<<<<< Updated upstream
 
 //   crop(event) {
 //     console.log(event.detail.x);
@@ -69,49 +74,131 @@ window.onload = function(){
     tempBtn.addEventListener("click", changeImg);
 }
 
+=======
 
+//   crop(event) {
+//     console.log(event.detail.x);
+//     console.log(event.detail.y);
+//     console.log(event.detail.width);
+//     console.log(event.detail.height);
+//     console.log(event.detail.rotate);
+//     console.log(event.detail.scaleX);
+//     console.log(event.detail.scaleY);
+//   },
+
+// });
+
+
+/*temp create img and crop img*/
+document.addEventListener("DOMContentLoaded", function(){
+    const imageInput = document.getElementById("imageInput");
+    const createButton = document.getElementById("createButton");
+    const generatedImage = document.getElementById("generatedImage");
+    const croppedCanvas = document.getElementById("croppedCanvas");
+    const ratioInputs = document.querySelectorAll('input[name="frame-size"]');
+    const cropButton = document.getElementById("cropButton")
+    const previewImg = document.querySelector(".preview-img img");
+
+    let cropper;
+
+    createButton.addEventListener("click", async function(){
+        //generative AI 모델 호출
+        //const generatedImageUrl = await generatedImage(); //Gen AI 모델 호출하고 생성된 이미지 URL 반환 ** 비동기 동작 **
+        generatedImage.src = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg";
+
+        //이미지가 로드된 후 Cropper.js 인스턴스 생성
+        if (cropper) {
+            cropper.destroy();
+        }
+
+        cropper = new Cropper(generatedImage,{
+            dragMode: 'move',
+            aspectRatio: 3/4,
+            autoCropArea: 0.8,
+            restore: false,
+            guides: false,
+            center: false,
+            highlight: false,
+            toggleDragModeOnDblclick: false,
+        });
+
+        //라디오 버튼의 변경 이벤트 핸들러를 추가
+        ratioInputs.forEach(function(input){
+            input.addEventListener("change", function(){
+                const selectedRatio = getSelectedRatio();
+                let words = selectedRatio.split('x')
+                var w = Number(words[0])
+                var h = Number(words[1])
+                cropper.setAspectRatio(w/h);
+            });
+        });
+    });
+
+    cropButton.addEventListener("click", function() {
+        //Crop버튼 클릭 시 크롭된 이미지를 얻어옴
+        const croppedImage = cropper.getCroppedCanvas();
+
+        //크롭된 이미지를 화면에 표시하거나 서버에 업로드하거나 다른 작업 수행 가능
+        if(croppedImage){
+            //크롭된 이미지를 화면에 표시(예: 이미지 요소에 설정)
+            const previewImg = document.querySelector(".preview-img img");  //이미지 요소 선택
+            previewImg.src = croppedImage.toDataURL(); //크롭된 이미지를 Data URL로 변환해 src에 설정
+        }
+    });
+
+    //async function generateImage() //Gen AI 모델 호출
+
+    function getSelectedRatio(){
+        //선택된 라디오 버튼의 값에 따라 적절한 비율 반환
+        var selectedRatioInput = document.querySelector('input[name="frame-size"]:checked');
+        return selectedRatioInput.value
+    }
+})
+>>>>>>> Stashed changes
+
+// 16/4를 숫자로 받지 않기 때문에. 문자열 split해서 w, h를 따로 받고 Number로 형변환 후 넣어주기
 
 /*crop 비율 바꾸기*/
 // 라디오 버튼 클릭시 호출되는 함수
-var w;  // 가로 비율
-var h;  // 세로비율
-function changeRatio(){
+// var w;  // 가로 비율
+// var h;  // 세로비율
+// function changeRatio(){
     
-    var options = document.getElementsByName("frame-size");
-    console.log(options[0].value)
+//     var options = document.getElementsByName("frame-size");
+//     console.log(options[0].value)
 
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            // 선택된 라디오 버튼의 값을 가져와서 표시
-            let words = options[i].value.split('x');
-            console.log(words[0]);
-            console.log(words[1]);
-            w = Number(words[0]);
-            h = Number(words[1]);
-            console.log(typeof Number(words[0]));
-            console.log(typeof Number(words[1]));
-            cropper.setAspectRatio(w/h)
-            break;
-        }
-    }
+//     for (var i = 0; i < options.length; i++) {
+//         if (options[i].checked) {
+//             // 선택된 라디오 버튼의 값을 가져와서 표시
+//             let words = options[i].value.split('x');
+//             console.log(words[0]);
+//             console.log(words[1]);
+//             w = Number(words[0]);
+//             h = Number(words[1]);
+//             console.log(typeof Number(words[0]));
+//             console.log(typeof Number(words[1]));
+//             cropper.setAspectRatio(w/h)
+//             break;
+//         }
+//     }
 
-}
-// 라디오 버튼 클릭 이벤트에 함수 연결
-var radioButtons = document.getElementsByName("frame-size");
-for (var i = 0; i < radioButtons.length; i++) {
-    radioButtons[i].addEventListener("click", changeRatio);
-}
+// }
+// // 라디오 버튼 클릭 이벤트에 함수 연결
+// var radioButtons = document.getElementsByName("frame-size");
+// for (var i = 0; i < radioButtons.length; i++) {
+//     radioButtons[i].addEventListener("click", changeRatio);
+// }
 
-// iphone 14 클릭하면 390x844 비율
+
 
 //const cropboxData = cropper.setCropBoxdata({left:0, top:0, width:100, height:100 })
 
-document.getElementById('cropImageBtn').addEventListener("click",
-function(){
-    var croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
-    alert(croppedImage);
+// document.getElementById('cropImageBtn').addEventListener("click",
+// function(){
+//     var croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
+//     alert(croppedImage);
 
-})
+// })
 
 
 /*Karlo API*/
@@ -201,6 +288,7 @@ chooseImgBtn = document.querySelector(".choose-img"),
 saveImgBtn = document.querySelector(".save-img");
 let brightness = "100", saturation = "100", inversion = "0", grayscale = "0";
 let rotate = 0, flipHorizontal = 1, flipVertical = 1;
+
 const loadImage = () => {
     let file = fileInput.files[0];
     if(!file) return;
@@ -297,37 +385,6 @@ saveImgBtn.addEventListener("click", saveImage);
 fileInput.addEventListener("change", loadImage);
 chooseImgBtn.addEventListener("click", () => fileInput.click());
 
-
-/*crop 비율 바꾸기*/
-// 라디오 버튼 클릭시 호출되는 함수
-var w;  // 가로 비율
-var h;  // 세로비율
-function changeRatio(){
-    
-    var options = document.getElementsByName("frame-size");
-    console.log(options[0].value)
-
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            // 선택된 라디오 버튼의 값을 가져와서 표시
-            let words = options[i].value.split('x');
-            console.log(words[0]);
-            console.log(words[1]);
-            w = Number(words[0]);
-            h = Number(words[1]);
-            console.log(typeof Number(words[0]));
-            console.log(typeof Number(words[1]));
-            cropper.setAspectRatio(w/h)
-            break;
-        }
-    }
-
-}
-// 라디오 버튼 클릭 이벤트에 함수 연결
-var radioButtons = document.getElementsByName("frame-size");
-for (var i = 0; i < radioButtons.length; i++) {
-    radioButtons[i].addEventListener("click", changeRatio);
-}
 
 
 
