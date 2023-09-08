@@ -50,5 +50,5 @@ def upload_image(request):
     return render(request, 'upload_image.html')
 
 def stylegen(request):
-    return render(request, 'stylegen.html')
+    return render(request, 'styletransfer.html')
 

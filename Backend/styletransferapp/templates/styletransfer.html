@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>StyleTransfer</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/> <!--외부스타일시트 연결-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> <!--외부스타일시트 연결-->
 </head>
 <body>
     <nav>
@@ -42,7 +43,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'stylegen' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class = "content">
                     <div>
@@ -242,7 +243,7 @@
             </div>
 
             
-            <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
             <script>
                 function goToScroll(name) {
                     var location = document.querySelector("." + name).offsetTop;
