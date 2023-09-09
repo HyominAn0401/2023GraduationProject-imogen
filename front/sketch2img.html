@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sketch2image</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" /> <!--외부스타일시트 연결-->
+</head>
+<body>
+    <nav>
+        <div class="wrapper">
+            <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1> <!--LOGO squaremaze 글자체 적용시켜야함-->
+
+            <ul class="menu">
+                <li><a href=".html">Function1</a></li>
+                <li><a href="motiongen.html">MotionGen</a></li>
+                <li><a href="text2img.html">Text2ImaGen</a></li>
+                <li><a href=".html">Function4</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <section id="aboutme">
+            <div>
+                <h2 class="title">Sketch2<span style="color:#B4C8BB">image</span></h2>
+                <p class="article">
+                    ImaGen는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br><br>
+
+                    원하는 배경화면이 어떤 모습인지 말해주세요! Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.<br><br>
+
+                    프롬프트를 입력하고 생성 버튼을 클릭하세요. 이미지를 생성하는 데 특별한 코드가 필요하지 않습니다. 지금 당장 놀라운 예술 작품을 만들어보세요!<br><br>
+                </p>
+                <div style="text-align: center;">
+                    <button class="button" type="button" onclick="goToScroll('button')">Get Started</button>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="aboutme" class="input-container">
+            <div>
+                <h2 class="comment-head">Sketch your Image</h2>
+                <canvas id="drawingCanvas" width="1024" height="1024" style="border:1px solid #000;"></canvas>
+            </div>
+
+
+            <div id="submit-icon">
+                <button id ="sk2img-generate" class="button-generate" type="submit" onclick="">Generate!</button>
+            </div>
+            <div id="submit"></div>
+        </section>
+
+
+        <section id="aboutme" class="image-section" style="display: block;">
+            <div style="margin-bottom: 50px;">
+                <h2 class="comment-head">Frame size</h2>
+                <form>
+                    <div class="frame-buttons">
+                        <div class="phoneframe" style="margin-bottom: 30px;">
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="390x844">
+                                <span>iPhone 14</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="393x852">
+                                <span>iPhone 14 Pro</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="428x926">
+                                <span>iPhone 14 Plus</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="428x932">
+                                <span>iPhone 14 Pro Max</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="390x844">
+                                <span>iPhone 13 / 13 Pro</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="375x812">
+                                <span>iPhone 13 mini</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="320x568">
+                                <span>iPhone SE</span>
+                            </label>
+                        </div>
+                        <div class="tabletframe" style="margin-bottom: 30px;">
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="1440x960">
+                                <span>iSurface Pro 8</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="744x1133">
+                                <span>iPad mini 8.3</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="834x1194">
+                                <span>iPad Pro 11"</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="1024x1366">
+                                <span>iPad Pro 12.9"</span>
+                            </label>
+                        </div>
+                        <div class="desktopframe" style="margin-bottom: 30px;">
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="640x416"> <!--1280x832-->
+                                <span>1280 x 832</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="1512x982">
+                                <span>1512 x 982</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="1728x1117">
+                                <span>1728 x 1117</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="1440x1024">
+                                <span>1440 x 1024</span>
+                            </label>
+                        </div>
+                        <div class="watchframe">
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="176x215">
+                                <span>Apple Watch 41mm</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="198x242">
+                                <span>Apple Watch 45mm</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="368x448"><!--184x224-->
+                                <span>Apple Watch 44mm</span>
+                            </label>
+                            <label class="button2">
+                                <input type="radio" name="frame-size" value="162x197">
+                                <span>Apple Watch 40mm</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--<h2 id="result" class="comment-head" style="display: block;">Result</h2>-->
+            <div class="container-cropper">
+                <div>
+                    <img id="image" src="./img/0.png">
+                    <button id="cropImageBtn">Crop Image</button>
+                </div>
+                <img src="" id="output">
+            </div>
+
+            <div class="container2 disable">
+                <h2>Image Editor</h2>
+                <div class="wrapper-imgeditor">
+                    <!--이미 style sheet에 존재-->
+                    <div class="editor-panel">
+                        <div class="filter">
+                            <label class="title3">Filters</label> <!--이미 style sheet에 존재-->
+                            <div class="options">
+                                <button id="brightness" class="active">Brightness</button>
+                                <button id="saturation">Saturation</button>
+                                <button id="inversion">Inversion</button>
+                                <button id="grayscale">Grayscale</button>
+                            </div>
+                            <div class="slider">
+                                <div class="filter-info">
+                                    <p class="name">Brightness</p>
+                                    <p class="value">100%</p>
+                                </div>
+                                <input type="range" value="100" min="0" max="200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-img">
+                        <img src="https://codingnepalweb.com/demos/image-editor-javascript/image-placeholder.svg" alt="preview-img">
+                    </div>
+                    <div class="controls">
+                        <button class="reset-filter">Reset Filters</button>
+                        <div class="row">
+                            <input type="file" class="file-input" accept="image/*" hidden>
+                            <button class="choose-img">Choose Image</button>
+                            <button class="save-img">Save Image</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="apikey.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
+        <script type="text/javascript" src="app.js">
+
+        </script>
+
+        <footer>
+            <div id="copyright">
+                <span>
+                    All contents Copyright 2021 by Chaeran Yoo. All rights reserved<br>
+                    Contact mail : ran4088@sookmyung.ac.kr
+                </span>
+            </div>
+        </footer>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,38 +1,42 @@
+/**
+ * get started button  누르면 아래로 스크롤 되는 함수
+ * @param {any} name
+ */
 function goToScroll(name) {
     var location = document.querySelector("." + name).offsetTop;
     window.scrollTo({top: location, behavior: 'smooth'});
 }
 
-/*crop image*/
-//import Cropper from 'cropperjs';
+///*crop image*/
+////import Cropper from 'cropperjs';
 
-var image = document.getElementById('image');
-const cropper = new Cropper(image, {
-//   aspectRatio: 3/4,
-//   viewMode:0,
-  dragMode: 'move',
-  aspectRatio: 3/4,
-  autoCropArea: 0.8,
-  restore: false,
-  guides: false,
-  center: false,
-  highlight: false,
-  //zoomable: false,
-//   cropBoxMovable: false,
-//   cropBoxResizable: false,
-  toggleDragModeOnDblclick: false,
+//var image = document.getElementById('image');
+//const cropper = new Cropper(image, {
+////   aspectRatio: 3/4,
+////   viewMode:0,
+//  dragMode: 'move',
+//  aspectRatio: 3/4,
+//  autoCropArea: 0.8,
+//  restore: false,
+//  guides: false,
+//  center: false,
+//  highlight: false,
+//  //zoomable: false,
+////   cropBoxMovable: false,
+////   cropBoxResizable: false,
+//  toggleDragModeOnDblclick: false,
 
-  crop(event) {
-    console.log(event.detail.x);
-    console.log(event.detail.y);
-    console.log(event.detail.width);
-    console.log(event.detail.height);
-    console.log(event.detail.rotate);
-    console.log(event.detail.scaleX);
-    console.log(event.detail.scaleY);
-  },
+//  crop(event) {
+//    console.log(event.detail.x);
+//    console.log(event.detail.y);
+//    console.log(event.detail.width);
+//    console.log(event.detail.height);
+//    console.log(event.detail.rotate);
+//    console.log(event.detail.scaleX);
+//    console.log(event.detail.scaleY);
+//  },
 
-});
+//});
 
 
 /*crop 비율 바꾸기*/
@@ -147,6 +151,13 @@ const getImage = async () => {
 
 submitIcon.addEventListener('click', getImage)
 //submitIcon.addEventListener('click', goToScroll('button-generate'))
+// app.js
+
+
+/* sketch2image api
+
+
+
 
 
 
