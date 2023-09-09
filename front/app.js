@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 /*Karlo API*/
-const REST_API_KEY = "ef7eb4aaf5fdd2c79b127b3a4b6e2309"
+const REST_API_KEY = config.apikey;
 const submitIcon = document.querySelector(".button-generate")
 const inputElement = document.querySelector("#prompt")
 const imageSection = document.querySelector('.image-section')
