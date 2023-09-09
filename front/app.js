@@ -4,89 +4,6 @@ function goToScroll(name) {
 }
 
 /*crop image*/
-//import Cropper from 'cropperjs';
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-// var image = document.getElementById('image');
-// const cropper = new Cropper(image, {
-// //   aspectRatio: 3/4,
-// //   viewMode:0,
-//   dragMode: 'move',
-//   aspectRatio: 3/4,
-//   autoCropArea: 0.8,
-//   restore: false,
-//   guides: false,
-//   center: false,
-//   highlight: false,
-//   //zoomable: false,
-// //   cropBoxMovable: false,
-// //   cropBoxResizable: false,
-//   toggleDragModeOnDblclick: false,
-<<<<<<< Updated upstream
-
-//   crop(event) {
-//     console.log(event.detail.x);
-//     console.log(event.detail.y);
-//     console.log(event.detail.width);
-//     console.log(event.detail.height);
-//     console.log(event.detail.rotate);
-//     console.log(event.detail.scaleX);
-//     console.log(event.detail.scaleY);
-//   },
-
-// });
-
-// 임의의 버튼 + cropper 만들기
-var imgurl= "https://cdn.aitimes.kr/news/photo/202303/27617_41603_044.jpg"
-const tempBtn = document.getElementById("#button-temp")
-var imageTemp = document.getElementById('#imageTemp');
-
-const changeImg = () => {
-    
-    //특정 img src를 가지는 cropper 객체 생성
-    let cropperTemp = new Cropper(imageTemp,{
-        dragMode: 'move',
-        aspectRatio: 3/4,
-        autoCropArea: 0.8,
-        restore: false,
-        guides: false,
-        center: false,
-        highlight: false,
-        toggleDragModeOnDblclick: false,
-
-        crop(event) {
-            console.log(event.detail.x);
-            console.log(event.detail.y);
-            console.log(event.detail.width);
-            console.log(event.detail.height);
-            console.log(event.detail.rotate);
-            console.log(event.detail.scaleX);
-            console.log(event.detail.scaleY);
-            },
-            
-    });
-    console.log("cropper 실행됨")
-    cropperTemp.replace(imgurl)
-}
-window.onload = function(){
-    tempBtn.addEventListener("click", changeImg);
-}
-
-=======
-
-//   crop(event) {
-//     console.log(event.detail.x);
-//     console.log(event.detail.y);
-//     console.log(event.detail.width);
-//     console.log(event.detail.height);
-//     console.log(event.detail.rotate);
-//     console.log(event.detail.scaleX);
-//     console.log(event.detail.scaleY);
-//   },
-
-// });
 
 
 /*temp create img and crop img*/
@@ -154,51 +71,6 @@ document.addEventListener("DOMContentLoaded", function(){
         return selectedRatioInput.value
     }
 })
->>>>>>> Stashed changes
-
-// 16/4를 숫자로 받지 않기 때문에. 문자열 split해서 w, h를 따로 받고 Number로 형변환 후 넣어주기
-
-/*crop 비율 바꾸기*/
-// 라디오 버튼 클릭시 호출되는 함수
-// var w;  // 가로 비율
-// var h;  // 세로비율
-// function changeRatio(){
-    
-//     var options = document.getElementsByName("frame-size");
-//     console.log(options[0].value)
-
-//     for (var i = 0; i < options.length; i++) {
-//         if (options[i].checked) {
-//             // 선택된 라디오 버튼의 값을 가져와서 표시
-//             let words = options[i].value.split('x');
-//             console.log(words[0]);
-//             console.log(words[1]);
-//             w = Number(words[0]);
-//             h = Number(words[1]);
-//             console.log(typeof Number(words[0]));
-//             console.log(typeof Number(words[1]));
-//             cropper.setAspectRatio(w/h)
-//             break;
-//         }
-//     }
-
-// }
-// // 라디오 버튼 클릭 이벤트에 함수 연결
-// var radioButtons = document.getElementsByName("frame-size");
-// for (var i = 0; i < radioButtons.length; i++) {
-//     radioButtons[i].addEventListener("click", changeRatio);
-// }
-
-
-
-//const cropboxData = cropper.setCropBoxdata({left:0, top:0, width:100, height:100 })
-
-// document.getElementById('cropImageBtn').addEventListener("click",
-// function(){
-//     var croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
-//     alert(croppedImage);
-
-// })
 
 
 /*Karlo API*/
@@ -233,35 +105,7 @@ const getImage = async () => {
         data?.images.forEach(imageObject => {
             console.log(imageObject.image)
             console.log(typeof imageObject.image)
-            // const imageContainer = document.createElement('div')
-            // imageContainer.classList.add('image-container')
-            // const imageElement = document.createElement('img')
-            // imageElement.setAttribute('src', imageObject.image)
-            // imageContainer.append(imageElement)
-            // imageSection.append(imageContainer)
-            cropper.destroy()
             image.src = imageObject.image
-            cropper = new Cropper(image,{
-                aspectRatio: 4/3,
-                dragMode: 'move',
-                autoCropArea: 0.8,
-                restore: false,
-                guides: false,
-                center: false,
-                highlight: false,
-                toggleDragModeOnDblclick: false,
-
-                crop(event) {
-                    console.log(event.detail.x);
-                    console.log(event.detail.y);
-                    console.log(event.detail.width);
-                    console.log(event.detail.height);
-                    console.log(event.detail.rotate);
-                    console.log(event.detail.scaleX);
-                    console.log(event.detail.scaleY);
-                },
-            })
-            //cropper.replace(imageObject.image)
         })
     } catch(error){
         console.error(error)
@@ -269,11 +113,6 @@ const getImage = async () => {
 }
 
 submitIcon.addEventListener('click', getImage)
-//submitIcon.addEventListener('click', goToScroll('button-generate'))
-
-
-
-
 
 /*Image editor*/
 const fileInput = document.querySelector(".file-input"),
