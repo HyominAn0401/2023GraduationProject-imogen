@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sketch2image</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <nav>
+        <div class="wrapper">
+            <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1>
+            <ul class="menu">
+                <li><a href=".html">Function1</a></li>
+                <li><a href="motiongen.html">MotionGen</a></li>
+                <li><a href="text2img.html">Text2ImaGen</a></li>
+                <li><a href=".html">Function4</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <section id="aboutme">
+            <div>
+                <h2 class="title">Sketch2<span style="color:#B4C8BB">image</span></h2>
+                <p class="article">
+                    Sketch2image는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br><br>
+                    원하는 배경화면이 어떤 모습인지 말해주세요! Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.<br><br>
+                    프롬프트를 입력하고 생성 버튼을 클릭하세요. 이미지를 생성하는 데 특별한 코드가 필요하지 않습니다. 지금 당장 놀라운 예술 작품을 만들어보세요!<br><br>
+                </p>
+                <div style="text-align: center;">
+                    <button class="button" type="button" onclick="goToScroll('button')">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="aboutme" class="input-container">
+            <div>
+                <h2 class="comment-head">Sketch your Image</h2>
+                <canvas id="drawingCanvas" width="1024" height="900" style="border:1px solid #000;"></canvas>
+            </div>
+
+            <div id="submit"></div>
+        </section>
+
+        <section id="aboutme" class="input-container">
+            <div>
+                <h2 class="comment-head">Prompt</h2>
+                <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="ex. A cute cat in a red house"></textarea>
+            </div>
+            <div>
+                <h2 class="comment-head">Negative Prompt</h2>
+                <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="ex. scary, dirty"></textarea>
+            </div>
+            
+            
+            <div id="submit-icon">
+                <button id="sk2img-generate" class="button-generate" type="submit" onclick="generateImage()">Generate!</button>
+            </div>
+            <div id ="submit"></div>
+        </section>
+
+
+
+        <section id="aboutme" class="image-section" style="display: block;">
+            <div style="margin-bottom: 50px;">
+                <h2 class="comment-head">Frame size</h2>
+                <input type="radio" id="ratio1" name="frame-size" value="4x3">
+                <label for="ratio1">4:3</label><br>
+
+                <input type="radio" id="ratio2" name="frame-size" value="16x9">
+                <label for="ratio2">16:9</label><br>
+            </div>
+            <div class="container-cropper">
+                <div>
+                    <img id="image" src="./img/0.png">
+                    <button id="cropImageBtn">Crop Image</button>
+                </div>
+                <img src="" id="output">
+            </div>
+
+            <div class="container2 disable">
+                <h2>Image Editor</h2>
+                <div class="brightness-control">
+                    <label for="brightness">Brightness:</label>
+                    <input type="range" id="brightness" name="brightness" min="0" max="200" value="100">
+                </div>
+
+                <div class="contrast-control">
+                    <label for="contrast">Contrast:</label>
+                    <input type="range" id="contrast" name="contrast" min="0" max="200" value="100">
+                </div>
+            </div>
+        </section>
+        <script src="apikey.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+
+        <footer>
+            <div id="copyright">
+                <span>
+                    All contents Copyright 2021 by Chaeran Yoo. All rights reserved<br>
+                    Contact mail : ran4088@sookmyung.ac.kr
+                </span>
+            </div>
+        </footer>
+    </div>
+    </div>
+</body>
+
+</html>

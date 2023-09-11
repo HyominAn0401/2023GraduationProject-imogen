@@ -1,3 +1,7 @@
+/**
+ * get started button  누르면 아래로 스크롤 되는 함수
+ * @param {any} name
+ */
 function goToScroll(name) {
     var location = document.querySelector("." + name).offsetTop;
     window.scrollTo({top: location, behavior: 'smooth'});
@@ -227,6 +231,106 @@ cropButton.addEventListener("click", function() {
         document.querySelector(".container2").classList.remove("disable");
     }
 });
+
+
+/*draw canvas*/
+let canvas = document.getElementById('drawingCanvas');
+let ctx = canvas.getContext('2d');
+let drawing = false;
+var sketch_file;
+
+canvas.addEventListener('mousedown', (event) => {
+    drawing = true;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    ctx.moveTo(x, y);
+});
+
+canvas.addEventListener('mouseup', () => {
+    drawing = false;
+    ctx.beginPath();
+});
+
+canvas.addEventListener('mousemove', (event) => {
+    if (!drawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'black';
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+});
+
+// Generate JPEG image from the canvas
+function saveImagetoJpg() {
+    let dataURL = canvas.toDataURL('image/jpeg'); // Convert canvas content to JPEG
+    let imageElement = document.getElementById('image');
+    imageElement.src = dataURL;
+    console.log(imageElement.src)
+    sketch_file=imageElement.src
+}
+
+document.getElementById('sk2img-generate').addEventListener('click', saveImagetoJpg);
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* sketch2image api */
+// app.js
+
+const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
+const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
+
+const generateImage = async () => {
+    let canvasData = canvas.toDataURL();
+    let blob = await fetch(canvasData).then(res => res.blob());
+
+    let formData = new FormData();
+    formData.append('sketch_file', blob, 'sketch.png');
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'x-api-key': API_KEY,
+            },
+            body: formData
+        });
+
+        if (response.status === 200) {
+            const imageBlob = await response.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
+            document.getElementById('image').src = imageUrl;
+        } else {
+            console.error('Error:', response.status, response.statusText);
+            const errorData = await response.json();
+            console.error('Error details:', errorData.error);
+        }
+
+    } catch (error) {
+        console.error('API call failed:', error);
+    }
+};
+
+document.getElementById('sk2img-generate').addEventListener('click', generateImage);
+
+
 
 
 
@@ -573,3 +677,6 @@ const getImage = async () => {
 
 submitIcon.addEventListener('click', getImage)
 */
+
+
+
