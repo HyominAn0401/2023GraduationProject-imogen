@@ -174,7 +174,7 @@ def generate_style_transfer_image(content_img_path, style_img_path): # 콘텐츠
         cnn = models.vgg19(pretrained=True).features.to(device).eval()
 
         # style transfer 수행
-        output = style_transfer(cnn, content_img=content_img, style_img=style_img, input_img=input_img, iters = 100)
+        output = style_transfer(cnn, content_img=content_img, style_img=style_img, input_img=input_img, iters = 300)
 
         return output
     
