@@ -8,95 +8,6 @@ function goToScroll(name) {
 }
 
 /*crop image*/
-// document.addEventListener("DOMContentLoaded", function(){
-//     const imageInput = document.getElementById("imageInput");
-//     const createButton = document.getElementById("createButton");
-//     const generatedImage = document.getElementById("generatedImage");
-//     const croppedCanvas = document.getElementById("croppedCanvas");
-//     const ratioInputs = document.querySelectorAll('input[name="frame-size"]');
-//     const cropButton = document.getElementById("cropButton");
-//     const previewImg = document.querySelector(".preview-img img");
-    
-//     const REST_API_KEY = config.apikey;
-//     const submitIcon = document.querySelector(".button-generate");
-//     const inputElement = document.querySelector("#prompt");
-//     const imageSection = document.querySelector('.image-section');
-//     const NinputElement = document.querySelector('#negative-prompt');
-    
-//     let cropper;
-    
-//     const getImage = async () => {
-//         const options = {
-//             method: "POST",
-//             headers:{
-//                 "Authorization": `KakaoAK ${REST_API_KEY}`,
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({
-//                 "prompt": inputElement.value,
-//                 "negative_prompt": NinputElement.value,
-//                 "width": 512,
-//                 "samples": 1
-//             })
-//         }
-//         try{
-//             const response = await fetch("https://api.kakaobrain.com/v2/inference/karlo/t2i", options)
-//             const data = await response.json()
-//             console.log(response)
-//             console.log(data)
-//             data?.images.forEach(imageObject => {
-//                 console.log(imageObject.image)
-//                 console.log(typeof imageObject.image)
-//                 const generatedImageUrl = imageObject.image;
-//                 generatedImage.src = generatedImageUrl;
-
-//                 // const imageContainer = document.createElement('div')
-//                 // imageContainer.classList.add('image-container')
-//                 // const imageElement = document.createElement('img')
-//                 // imageElement.setAttribute('src', imageObject.image)
-//                 // imageContainer.append(imageElement)
-//                 // imageSection.append(imageContainer)
-//             })
-            
-//             // 이미지가 로드된 후 Cropper.js 인스턴스 생성
-//             if (cropper) {
-//                 cropper.destroy();
-//             }
-            
-//             cropper = new Cropper(generatedImage, {
-//                 dragMode: 'move',
-//                 aspectRatio: 3/4,
-//                 autoCropArea: 0.8,
-//                 restore: false,
-//                 guides: false,
-//                 center: false,
-//                 highlight: false,
-//                 toggleDragModeOnDblclick: false,
-//             });
-            
-//             // 라디오 버튼의 변경 이벤트 핸들러를 추가
-//             ratioInputs.forEach(function(input){
-//                 input.addEventListener("change", function(){
-//                     const selectedRatio = getSelectedRatio();
-//                     let words = selectedRatio.split('x');
-//                     var w = Number(words[0]);
-//                     var h = Number(words[1]);
-//                     cropper.setAspectRatio(w/h);
-//                 });
-//             });
-//         } catch(error){
-//             console.error(error);
-//         }
-//     }
-
-//     submitIcon.addEventListener('click', getImage);
-
-//     function getSelectedRatio(){
-//         // 선택된 라디오 버튼의 값에 따라 적절한 비율 반환
-//         var selectedRatioInput = document.querySelector('input[name="frame-size"]:checked');
-//         return selectedRatioInput.value;
-//     }
-// });
 const imageInput = document.getElementById("imageInput");
 const createButton = document.getElementById("createButton");
 const generatedImage = document.getElementById("generatedImage");
@@ -107,7 +18,7 @@ const previewImg = document.querySelector(".preview-img img");
 const resetFilterBtn = document.querySelector(".reset-filter");
 
 const REST_API_KEY = config.apikey;
-const submitIcon = document.querySelector(".button-generate");
+const submitIcon = document.getElementById("#text2imgBtn");
 const inputElement = document.querySelector("#prompt");
 const imageSection = document.querySelector('.image-section');
 const NinputElement = document.querySelector('#negative-prompt');
@@ -167,33 +78,12 @@ const getImage = async () => {
               })
               .catch(error => console.error(error));
             })
-
-
-
             // const imageContainer = document.createElement('div')
             // imageContainer.classList.add('image-container')
             // const imageElement = document.createElement('img')
             // imageElement.setAttribute('src', imageObject.image)
             // imageContainer.append(imageElement)
             // imageSection.append(imageContainer)
-
-        
-        // 이미지가 로드된 후 Cropper.js 인스턴스 생성
-        // if (cropper) {
-        //     cropper.destroy();
-        // }
-        
-        // cropper = new Cropper(generatedImage, {
-        //     dragMode: 'move',
-        //     aspectRatio: 3/4,
-        //     autoCropArea: 0.8,
-        //     restore: false,
-        //     guides: false,
-        //     center: false,
-        //     highlight: false,
-        //     toggleDragModeOnDblclick: false,
-        // });
-        
         // 라디오 버튼의 변경 이벤트 핸들러를 추가
         ratioInputs.forEach(function(input){
             input.addEventListener("change", function(){
@@ -209,7 +99,7 @@ const getImage = async () => {
     }
 };
 
-submitIcon.addEventListener('click', getImage);
+//submitIcon.addEventListener('click', getImage);
 
 function getSelectedRatio(){
     // 선택된 라디오 버튼의 값에 따라 적절한 비율 반환
@@ -225,7 +115,6 @@ cropButton.addEventListener("click", function() {
     //크롭된 이미지를 화면에 표시하거나 서버에 업로드하거나 다른 작업 수행 가능
     if(croppedImage){
         //크롭된 이미지를 화면에 표시(예: 이미지 요소에 설정)
-        //const previewImg = document.querySelector(".preview-img img");  //이미지 요소 선택
         previewImg.src = croppedImage.toDataURL(); //크롭된 이미지를 Data URL로 변환해 src에 설정
         resetFilterBtn.click();
         document.querySelector(".container2").classList.remove("disable");
@@ -269,15 +158,12 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 // Generate JPEG image from the canvas
-function saveImagetoJpg() {
-    let dataURL = canvas.toDataURL('image/jpeg'); // Convert canvas content to JPEG
-    let imageElement = document.getElementById('image');
-    imageElement.src = dataURL;
-    console.log(imageElement.src)
-    sketch_file=imageElement.src
-}
+// function saveImagetoJpg() {
+//     let dataURL = canvas.toDataURL('image/jpeg'); // Convert canvas content to JPEG
+//     sketch_file=imageElement.src
+// }
 
-document.getElementById('sk2img-generate').addEventListener('click', saveImagetoJpg);
+// document.getElementById('sk2img-generate').addEventListener('click', saveImagetoJpg);
 
 
 
@@ -298,11 +184,12 @@ const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
 const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
 
 const generateImage = async () => {
-    let canvasData = canvas.toDataURL();
+    let canvasData = canvas.toDataURL('image/jpeg');
     let blob = await fetch(canvasData).then(res => res.blob());
 
-    let formData = new FormData();
-    formData.append('sketch_file', blob, 'sketch.png');
+    let form = new FormData();
+    form.append('sketch_file', blob, canvasData);
+    form.append('prompt', inputElement.value)
 
     try {
         const response = await fetch(API_URL, {
@@ -310,18 +197,51 @@ const generateImage = async () => {
             headers: {
                 'x-api-key': API_KEY,
             },
-            body: formData
+            body: form,
         });
 
         if (response.status === 200) {
             const imageBlob = await response.blob();
-            const imageUrl = URL.createObjectURL(imageBlob);
-            document.getElementById('image').src = imageUrl;
+            const generatedImageUrl = URL.createObjectURL(imageBlob);
+            //document.getElementById('image').src = imageUrl;
+            fetch(generatedImageUrl)
+              .then(response => response.blob())
+              .then(blob => {
+                const url = URL.createObjectURL(blob);
+
+                // 이미지를 Cropper.js에 전달
+                if (cropper) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper(generatedImage, {
+                    dragMode: 'move',
+                        aspectRatio: 3/4,
+                        autoCropArea: 0.8,
+                        restore: false,
+                        guides: false,
+                        center: false,
+                        highlight: false,
+                        toggleDragModeOnDblclick: false,
+                });
+
+                cropper.replace(url);
+              })
         } else {
             console.error('Error:', response.status, response.statusText);
             const errorData = await response.json();
             console.error('Error details:', errorData.error);
         }
+
+        ratioInputs.forEach(function(input){
+            input.addEventListener("change", function(){
+                const selectedRatio = getSelectedRatio();
+                let words = selectedRatio.split('x');
+                var w = Number(words[0]);
+                var h = Number(words[1]);
+                cropper.setAspectRatio(w/h);
+            });
+        });
 
     } catch (error) {
         console.error('API call failed:', error);
@@ -329,158 +249,6 @@ const generateImage = async () => {
 };
 
 document.getElementById('sk2img-generate').addEventListener('click', generateImage);
-
-
-
-
-
-
-
-// const imageInput = document.getElementById("imageInput");
-// const createButton = document.getElementById("createButton");
-// const generatedImage = document.getElementById("generatedImage");
-// const croppedCanvas = document.getElementById("croppedCanvas");
-// const ratioInputs = document.querySelectorAll('input[name="frame-size"]');
-// const cropButton = document.getElementById("cropButton");
-// const previewImg = document.querySelector(".preview-img img");
-
-// const submitIcon = document.querySelector(".button-generate");
-// const inputElement = document.querySelector("#prompt");
-// const imageSection = document.querySelector('.image-section');
-// const NinputElement = document.querySelector('#negative-prompt');
-
-// let cropper;
-
-// const getImage = async () => {
-//     const options = {
-//         method: "POST",
-//         headers: {
-//             "Authorization": `KakaoAK ${REST_API_KEY}`,
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             "prompt": inputElement.value,
-//             "negative_prompt": NinputElement.value,
-//             "width": 512,
-//             "samples": 1
-//         })
-//     };
-//     try {
-//         const response = await fetch("https://api.kakaobrain.com/v2/inference/karlo/t2i", options);
-//         const data = await response.json();
-//         console.log(response);
-//         console.log(data);
-
-//         if (data?.images.length > 0) {
-//             const generatedImageUrl = data.images[0].image;
-
-//             fetch(generatedImageUrl)
-//               .then(response => response.blob())
-//               .then(blob => {
-//                 const url = URL.createObjectURL(blob);
-
-//                 // 이미지를 Cropper.js에 전달
-//                 if (cropper) {
-//                     cropper.destroy();
-//                 }
-
-//                 cropper = new Cropper(generatedImage, {
-//                   aspectRatio: 3/4, // 원하는 가로:세로 비율로 설정
-//                   viewMode: 2,
-//                   dragMode: 'move',
-//                 });
-
-//                 cropper.replace(url);
-//               })
-//               .catch(error => console.error(error));
-//         }
-
-//         // 이미지가 로드된 후 Cropper.js 인스턴스 생성
-//         if (cropper) {
-//             cropper.destroy();
-//         }
-
-//         // 나머지 코드 (라디오 버튼 핸들러 등)는 그대로 유지
-//         // ...
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
-
-// submitIcon.addEventListener('click', getImage);
-
-// function getSelectedRatio() {
-//     var selectedRatioInput = document.querySelector('input[name="frame-size"]:checked');
-//     return selectedRatioInput.value;
-// }
-
-
-
-// /*temp create img and crop img*/
-// document.addEventListener("DOMContentLoaded", function(){
-//     const imageInput = document.getElementById("imageInput");
-//     const createButton = document.getElementById("createButton");
-//     const generatedImage = document.getElementById("generatedImage");
-//     const croppedCanvas = document.getElementById("croppedCanvas");
-//     const ratioInputs = document.querySelectorAll('input[name="frame-size"]');
-//     const cropButton = document.getElementById("cropButton")
-//     const previewImg = document.querySelector(".preview-img img");
-
-//     let cropper;
-
-//     createButton.addEventListener("click", async function(){
-//         //generative AI 모델 호출
-//         //const generatedImageUrl = await generatedImage(); //Gen AI 모델 호출하고 생성된 이미지 URL 반환 ** 비동기 동작 **
-//         generatedImage.src = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg";
-
-//         //이미지가 로드된 후 Cropper.js 인스턴스 생성
-//         if (cropper) {
-//             cropper.destroy();
-//         }
-
-//         cropper = new Cropper(generatedImage,{
-//             dragMode: 'move',
-//             aspectRatio: 3/4,
-//             autoCropArea: 0.8,
-//             restore: false,
-//             guides: false,
-//             center: false,
-//             highlight: false,
-//             toggleDragModeOnDblclick: false,
-//         });
-
-//         //라디오 버튼의 변경 이벤트 핸들러를 추가
-//         ratioInputs.forEach(function(input){
-//             input.addEventListener("change", function(){
-//                 const selectedRatio = getSelectedRatio();
-//                 let words = selectedRatio.split('x')
-//                 var w = Number(words[0])
-//                 var h = Number(words[1])
-//                 cropper.setAspectRatio(w/h);
-//             });
-//         });
-//     });
-
-//     cropButton.addEventListener("click", function() {
-//         //Crop버튼 클릭 시 크롭된 이미지를 얻어옴
-//         const croppedImage = cropper.getCroppedCanvas();
-
-//         //크롭된 이미지를 화면에 표시하거나 서버에 업로드하거나 다른 작업 수행 가능
-//         if(croppedImage){
-//             //크롭된 이미지를 화면에 표시(예: 이미지 요소에 설정)
-//             const previewImg = document.querySelector(".preview-img img");  //이미지 요소 선택
-//             previewImg.src = croppedImage.toDataURL(); //크롭된 이미지를 Data URL로 변환해 src에 설정
-//         }
-//     });
-
-//     //async function generateImage() //Gen AI 모델 호출
-
-//     function getSelectedRatio(){
-//         //선택된 라디오 버튼의 값에 따라 적절한 비율 반환
-//         var selectedRatioInput = document.querySelector('input[name="frame-size"]:checked');
-//         return selectedRatioInput.value
-//     }
-// })
 
 
 // /*Karlo API*/

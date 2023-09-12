@@ -14,8 +14,8 @@
         <div class="wrapper">
             <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1>
             <ul class="menu">
-                <li><a href=".html">Function1</a></li>
-                <li><a href="motiongen.html">MotionGen</a></li>
+                <li><a href="styletransfer.html">StyleGen</a></li>
+                <li><a href="sketch2img.html">Sketch2Img</a></li>
                 <li><a href="text2img.html">Text2ImaGen</a></li>
                 <li><a href=".html">Function4</a></li>
             </ul>
@@ -40,7 +40,7 @@
         <section id="aboutme" class="input-container">
             <div>
                 <h2 class="comment-head">Sketch your Image</h2>
-                <canvas id="drawingCanvas" width="1024" height="900" style="border:1px solid #000;"></canvas>
+                <canvas id="drawingCanvas" width="1024" height="1024" style="border:1px solid #000;"></canvas>
             </div>
 
             <div id="submit"></div>
@@ -50,12 +50,7 @@
             <div>
                 <h2 class="comment-head">Prompt</h2>
                 <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="ex. A cute cat in a red house"></textarea>
-            </div>
-            <div>
-                <h2 class="comment-head">Negative Prompt</h2>
-                <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="ex. scary, dirty"></textarea>
-            </div>
-            
+            </div>            
             
             <div id="submit-icon">
                 <button id="sk2img-generate" class="button-generate" type="submit" onclick="generateImage()">Generate!</button>
@@ -68,30 +63,141 @@
         <section id="aboutme" class="image-section" style="display: block;">
             <div style="margin-bottom: 50px;">
                 <h2 class="comment-head">Frame size</h2>
-                <input type="radio" id="ratio1" name="frame-size" value="4x3">
-                <label for="ratio1">4:3</label><br>
-
-                <input type="radio" id="ratio2" name="frame-size" value="16x9">
-                <label for="ratio2">16:9</label><br>
+                <form>
+                <div class="frame-buttons">
+                    <div class="phoneframe" style="margin-bottom: 30px;">
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1170x2532">
+                            <span>iPhone 14</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1179x2556">
+                            <span>iPhone 14 Pro</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1284x2778">
+                            <span>iPhone 14 Plus</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="428x932">
+                            <span>iPhone 14 Pro Max</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="390x844">
+                            <span>iPhone 13 / 13 Pro</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="375x812">
+                            <span>iPhone 13 mini</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="320x568">
+                            <span>iPhone SE</span>
+                        </label>
+                    </div>
+                    <div class="tabletframe" style="margin-bottom: 30px;">
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1440x960">
+                            <span>iSurface Pro 8</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="744x1133">
+                            <span>iPad mini 8.3</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="834x1194">
+                            <span>iPad Pro 11"</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1024x1366">
+                            <span>iPad Pro 12.9"</span>
+                        </label>
+                    </div>
+                    <div class="desktopframe" style="margin-bottom: 30px;">
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="640x416"> <!--1280x832-->
+                            <span>1280 x 832</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1512x982">
+                            <span>1512 x 982</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1728x1117">
+                            <span>1728 x 1117</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="1440x1024">
+                            <span>1440 x 1024</span>
+                        </label>
+                    </div>
+                    <div class="watchframe">
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="176x215">
+                            <span>Apple Watch 41mm</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="198x242">
+                            <span>Apple Watch 45mm</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="368x448"><!--184x224-->
+                            <span>Apple Watch 44mm</span>
+                        </label>
+                        <label class = "button2">
+                            <input type="radio" name = "frame-size" value="162x197">
+                            <span>Apple Watch 40mm</span>
+                        </label>
+                    </div>
+                </div></form>
             </div>
+            <!--<h2 id="result" class="comment-head" style="display: block;">Result</h2>-->
+
+
             <div class="container-cropper">
                 <div>
-                    <img id="image" src="./img/0.png">
-                    <button id="cropImageBtn">Crop Image</button>
+                    <img id="generatedImage" src="" alt="생성된 이미지">
                 </div>
-                <img src="" id="output">
+                <div>
+                    <canvas id="croppedCanvas"></canvas>
+                </div>
+                
+                <button id="cropButton">Crop</button>
+                
             </div>
 
             <div class="container2 disable">
                 <h2>Image Editor</h2>
-                <div class="brightness-control">
-                    <label for="brightness">Brightness:</label>
-                    <input type="range" id="brightness" name="brightness" min="0" max="200" value="100">
-                </div>
-
-                <div class="contrast-control">
-                    <label for="contrast">Contrast:</label>
-                    <input type="range" id="contrast" name="contrast" min="0" max="200" value="100">
+                <div class = "wrapper-imgeditor"> <!--이미 style sheet에 존재-->
+                    <div class="editor-panel">
+                        <div class="filter">
+                            <label class="title3">Filters</label> <!--이미 style sheet에 존재-->
+                            <div class="options">
+                                <button id="brightness" class="active">Brightness</button>
+                                <button id="saturation">Saturation</button>
+                                <button id="inversion">Inversion</button>
+                                <button id="grayscale">Grayscale</button>
+                            </div>
+                            <div class="slider">
+                                <div class="filter-info">
+                                    <p class="name">Brightness</p>
+                                    <p class="value">100%</p>
+                                </div>
+                                <input type="range" value="100" min="0" max="200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-img">
+                        <img src="https://codingnepalweb.com/demos/image-editor-javascript/image-placeholder.svg" alt="preview-img">
+                    </div>
+                    <div class="controls">
+                        <button class="reset-filter">Reset Filters</button>
+                        <div class="row">
+                            <input type="file" class="file-input" accept="image/*" hidden>
+                            <!-- <button class="choose-img">Choose Image</button> -->
+                            <button class="save-img">Save Image</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -110,5 +216,6 @@
     </div>
     </div>
 </body>
+
 
 </html>
