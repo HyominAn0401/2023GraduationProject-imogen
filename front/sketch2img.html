@@ -40,13 +40,10 @@
         <section id="aboutme" class="input-container">
             <div>
                 <h2 class="comment-head">Sketch your Image</h2>
-                <canvas id="drawingCanvas" width="1024" height="1024" style="border:1px solid #000;"></canvas>
+                <canvas id="drawingCanvas" width="500" height="500" style="border:1px solid #000;"></canvas>
             </div>
 
             <div id="submit"></div>
-        </section>
-
-        <section id="aboutme" class="input-container">
             <div>
                 <h2 class="comment-head">Prompt</h2>
                 <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="ex. A cute cat in a red house"></textarea>
@@ -162,9 +159,12 @@
                     <canvas id="croppedCanvas"></canvas>
                 </div>
                 
-                <button id="cropButton">Crop</button>
+                <button id="cropButton" class="button-generate">Crop the image</button>
                 
             </div>
+            </section>
+
+            <section id="aboutme">
 
             <div class="container2 disable">
                 <h2>Image Editor</h2>
@@ -203,7 +203,7 @@
         </section>
         <script src="apikey.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
-        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="script.js"></script>
 
         <footer>
             <div id="copyright">

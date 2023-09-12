@@ -1,4 +1,4 @@
-/**
+/*
  * get started button  누르면 아래로 스크롤 되는 함수
  * @param {any} name
  */
@@ -8,19 +8,19 @@ function goToScroll(name) {
 }
 
 /*crop image*/
-const imageInput = document.getElementById("imageInput");
-const createButton = document.getElementById("createButton");
+//const imageInput = document.getElementById("imageInput");
+//const createButton = document.getElementById("createButton");
 const generatedImage = document.getElementById("generatedImage");
-const croppedCanvas = document.getElementById("croppedCanvas");
+//const croppedCanvas = document.getElementById("croppedCanvas");
 const ratioInputs = document.querySelectorAll('input[name="frame-size"]');
 const cropButton = document.getElementById("cropButton");
 const previewImg = document.querySelector(".preview-img img");
 const resetFilterBtn = document.querySelector(".reset-filter");
 
 const REST_API_KEY = config.apikey;
-const submitIcon = document.getElementById("#text2imgBtn");
+const submitIcon = document.getElementById("text2imgBtn");
 const inputElement = document.querySelector("#prompt");
-const imageSection = document.querySelector('.image-section');
+//const imageSection = document.querySelector('.image-section');
 const NinputElement = document.querySelector('#negative-prompt');
 
 let cropper;
@@ -99,7 +99,7 @@ const getImage = async () => {
     }
 };
 
-//submitIcon.addEventListener('click', getImage);
+submitIcon.addEventListener('click', getImage);
 
 function getSelectedRatio(){
     // 선택된 라디오 버튼의 값에 따라 적절한 비율 반환
@@ -122,40 +122,40 @@ cropButton.addEventListener("click", function() {
 });
 
 
-/*draw canvas*/
-let canvas = document.getElementById('drawingCanvas');
-let ctx = canvas.getContext('2d');
-let drawing = false;
-var sketch_file;
+// /*draw canvas*/
+// let canvas_sketch = document.getElementById('drawingCanvas');
+// let ctx = canvas_sketch.getContext('2d');
+// let drawing = false;
+// var sketch_file;
 
-canvas.addEventListener('mousedown', (event) => {
-    drawing = true;
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    ctx.moveTo(x, y);
-});
+// canvas_sketch.addEventListener('mousedown', (event) => {
+//     drawing = true;
+//     const rect = canvas_sketch.getBoundingClientRect();
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
+//     ctx.moveTo(x, y);
+// });
 
-canvas.addEventListener('mouseup', () => {
-    drawing = false;
-    ctx.beginPath();
-});
+// canvas_sketch.addEventListener('mouseup', () => {
+//     drawing = false;
+//     ctx.beginPath();
+// });
 
-canvas.addEventListener('mousemove', (event) => {
-    if (!drawing) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+// canvas_sketch.addEventListener('mousemove', (event) => {
+//     if (!drawing) return;
+//     const rect = canvas_sketch.getBoundingClientRect();
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
 
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = 'black';
+//     ctx.lineWidth = 5;
+//     ctx.lineCap = 'round';
+//     ctx.strokeStyle = 'black';
 
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-});
+//     ctx.lineTo(x, y);
+//     ctx.stroke();
+//     ctx.beginPath();
+//     ctx.moveTo(x, y);
+// });
 
 // Generate JPEG image from the canvas
 // function saveImagetoJpg() {
@@ -177,78 +177,153 @@ canvas.addEventListener('mousemove', (event) => {
 
 
 
-/* sketch2image api */
+// /* sketch2image api 1*/
+// // app.js
+
+// const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
+// const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
+
+// const generateImage = async () => {
+//     let canvasData = canvas.toDataURL('image/jpeg');
+//     let blob = await fetch(canvasData).then(res => res.blob());
+
+//     let form = new FormData();
+//     form.append('sketch_file', blob, canvasData);
+//     form.append('prompt', inputElement.value)
+
+//     try {
+//         const response = await fetch(API_URL, {
+//             method: 'POST',
+//             headers: {
+//                 'x-api-key': API_KEY,
+//             },
+//             body: form,
+//         });
+
+//         if (response.status === 200) {
+//             const imageBlob = await response.blob();
+//             const generatedImageUrl = URL.createObjectURL(imageBlob);
+//             //document.getElementById('image').src = imageUrl;
+//             fetch(generatedImageUrl)
+//               .then(response => response.blob())
+//               .then(blob => {
+//                 const url = URL.createObjectURL(blob);
+
+//                 // 이미지를 Cropper.js에 전달
+//                 if (cropper) {
+//                     cropper.destroy();
+//                 }
+
+//                 cropper = new Cropper(generatedImage, {
+//                     dragMode: 'move',
+//                         aspectRatio: 3/4,
+//                         autoCropArea: 0.8,
+//                         restore: false,
+//                         guides: false,
+//                         center: false,
+//                         highlight: false,
+//                         toggleDragModeOnDblclick: false,
+//                 });
+
+//                 cropper.replace(url);
+//               })
+//         } else {
+//             console.error('Error:', response.status, response.statusText);
+//             const errorData = await response.json();
+//             console.error('Error details:', errorData.error);
+//         }
+
+//         ratioInputs.forEach(function(input){
+//             input.addEventListener("change", function(){
+//                 const selectedRatio = getSelectedRatio();
+//                 let words = selectedRatio.split('x');
+//                 var w = Number(words[0]);
+//                 var h = Number(words[1]);
+//                 cropper.setAspectRatio(w/h);
+//             });
+//         });
+
+//     } catch (error) {
+//         console.error('API call failed:', error);
+//     }
+// };
+
+// document.getElementById('sk2img-generate').addEventListener('click', generateImage);
+
+
+/* sketch2image api 2*/
 // app.js
 
-const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
-const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
+// const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
+// const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
 
-const generateImage = async () => {
-    let canvasData = canvas.toDataURL('image/jpeg');
-    let blob = await fetch(canvasData).then(res => res.blob());
+// const generateImage = async () => {
+//     let form = new FormData();
+//     canvas_sketch.toBlob((blob) => {
+//         form.append('sketch_file', blob, canvasData);
+//         form.append('prompt', inputElement.value)
+//     })
+//     // let canvasData = canvas.toDataURL('image/jpeg');
+//     // let blob = await fetch(canvasData).then(res => res.blob());
 
-    let form = new FormData();
-    form.append('sketch_file', blob, canvasData);
-    form.append('prompt', inputElement.value)
+//     try {
+//         const response = await fetch(API_URL, {
+//             method: 'POST',
+//             headers: {
+//                 'x-api-key': API_KEY,
+//             },
+//             body: form,
+//         });
 
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'x-api-key': API_KEY,
-            },
-            body: form,
-        });
+//         if (response.status === 200) {
+//             const imageBlob = await response.blob();
+//             const generatedImageUrl = URL.createObjectURL(imageBlob);
+//             //document.getElementById('image').src = imageUrl;
+//             fetch(generatedImageUrl)
+//               .then(response => response.blob())
+//               .then(blob => {
+//                 const url = URL.createObjectURL(blob);
 
-        if (response.status === 200) {
-            const imageBlob = await response.blob();
-            const generatedImageUrl = URL.createObjectURL(imageBlob);
-            //document.getElementById('image').src = imageUrl;
-            fetch(generatedImageUrl)
-              .then(response => response.blob())
-              .then(blob => {
-                const url = URL.createObjectURL(blob);
+//                 // 이미지를 Cropper.js에 전달
+//                 if (cropper) {
+//                     cropper.destroy();
+//                 }
 
-                // 이미지를 Cropper.js에 전달
-                if (cropper) {
-                    cropper.destroy();
-                }
+//                 cropper = new Cropper(generatedImage, {
+//                     dragMode: 'move',
+//                         aspectRatio: 3/4,
+//                         autoCropArea: 0.8,
+//                         restore: false,
+//                         guides: false,
+//                         center: false,
+//                         highlight: false,
+//                         toggleDragModeOnDblclick: false,
+//                 });
 
-                cropper = new Cropper(generatedImage, {
-                    dragMode: 'move',
-                        aspectRatio: 3/4,
-                        autoCropArea: 0.8,
-                        restore: false,
-                        guides: false,
-                        center: false,
-                        highlight: false,
-                        toggleDragModeOnDblclick: false,
-                });
+//                 cropper.replace(url);
+//               })
+//         } else {
+//             console.error('Error:', response.status, response.statusText);
+//             const errorData = await response.json();
+//             console.error('Error details:', errorData.error);
+//         }
 
-                cropper.replace(url);
-              })
-        } else {
-            console.error('Error:', response.status, response.statusText);
-            const errorData = await response.json();
-            console.error('Error details:', errorData.error);
-        }
+//         ratioInputs.forEach(function(input){
+//             input.addEventListener("change", function(){
+//                 const selectedRatio = getSelectedRatio();
+//                 let words = selectedRatio.split('x');
+//                 var w = Number(words[0]);
+//                 var h = Number(words[1]);
+//                 cropper.setAspectRatio(w/h);
+//             });
+//         });
 
-        ratioInputs.forEach(function(input){
-            input.addEventListener("change", function(){
-                const selectedRatio = getSelectedRatio();
-                let words = selectedRatio.split('x');
-                var w = Number(words[0]);
-                var h = Number(words[1]);
-                cropper.setAspectRatio(w/h);
-            });
-        });
+//     } catch (error) {
+//         console.error('API call failed:', error);
+//     }
+// };
 
-    } catch (error) {
-        console.error('API call failed:', error);
-    }
-};
-
-document.getElementById('sk2img-generate').addEventListener('click', generateImage);
+// document.getElementById('sk2img-generate').addEventListener('click', generateImage);
 
 
 // /*Karlo API*/
