@@ -1,4 +1,6 @@
 apikey.js
 secret.json
 Backend/secret.json
-
+static/img/
+img/
+Backend/static/img/
