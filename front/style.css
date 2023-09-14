@@ -443,7 +443,7 @@ hr.line1{
   
   display: flex;*/
   overflow: hidden;
-  margin-left: 20px;
+  margin-left: 0px;
   border-radius: 5px;
   align-items: center;
   justify-content: center;

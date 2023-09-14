@@ -62,30 +62,30 @@
                                     <img src="" alt="미리보기 이미지" class="preview">
                                 </div>
                                 <label class="file-label" for="chooseFile">Choose File</label>
-                                <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg" required>
+                                <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg">
                             </div>
                         
                             
                             <div class="container">
                                 <div class="cards">
                                     <label class="card">
-                                        <input type="radio" name="image-card" value="00.png">
+                                        <input type="radio" name="content-image" value="00.png">
                                         <img class="thumnail" src="img/c1.png" alt="" />
                                     </label>
                                     <label class="card">
-                                        <input type="radio" name="image-card" value="01.png">
+                                        <input type="radio" name="content-image" value="01.png">
                                         <img class="thumnail" src="img/c2.png" alt="" />
                                     </label>
                                     
                                     <label class="card">
-                                        <input type="radio" name="image-card" value="02.png">
+                                        <input type="radio" name="content-image" value="02.png">
                                         <img class="thumnail" src="img/c3.png" alt="" />
                                     </label>
                                     <label class="card">
-                                        <input type="radio" name="image-card" value="03.png">
+                                        <input type="radio" name="content-image" value="03.png">
                                         <img class="thumnail" src="img/c4.png" alt="" />
                                     </label>
-
+                                    <input type="hidden", id="contentRadioInput" value="">
                                 </div>
                             </div>
                         </div>
@@ -106,26 +106,27 @@
                                 <img src="" alt="미리보기 이미지" class="preview">
                             </div>
                             <label class="file-label" for="chooseFile2">Choose File</label>
-                            <input class="file" id="chooseFile2" type="file" onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg" required>
+                            <input class="file" id="chooseFile2" type="file" onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg">
                         </div>
                         <div class="container">
                             <div class="cards">
                                 <label class="card">
-                                    <input type="radio" name="video-card" value="0.mp4">
+                                    <input type="radio" name="style-image" value="0.mp4">
                                     <img class="thumnail" src="img/s1.png" alt="" />
                                 </label>
                                 <label class="card">
-                                    <input type="radio" name="video-card" value="1.mp4">
+                                    <input type="radio" name="style-image" value="1.mp4">
                                     <img class="thumnail" src="img/s2.png" alt="" />
                                 </label>
                                 <label class="card">
-                                    <input type="radio" name="video-card" value="1.mp4">
+                                    <input type="radio" name="style-image" value="1.mp4">
                                     <img class="thumnail" src="img/s3.png" alt="" />
                                 </label>
                                 <label class="card">
-                                    <input type="radio" name="video-card" value="1.mp4">
+                                    <input type="radio" name="style-image" value="1.mp4">
                                     <img class="thumnail" src="img/s4.png" alt="" />
                                 </label>
+                                <input type="hidden", id="styleRadioInput" value="">
                             </div>
                         </div>
                     </div>
@@ -247,7 +248,7 @@
             </div>
 
             
-            
+            <script type="text/javascript" src="styletransferApp.js"></script>
             <script>
                 function goToScroll(name) {
                     var location = document.querySelector("." + name).offsetTop;

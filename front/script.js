@@ -8,7 +8,6 @@ function goToScroll(name) {
 let canvas_sketch = document.getElementById('drawingCanvas');
 let ctx = canvas_sketch.getContext('2d');
 let drawing = false;
-var sketch_file;
 
 canvas_sketch.addEventListener('mousedown', (event) => {
     drawing = true;
@@ -55,7 +54,7 @@ canvas_sketch.addEventListener('mousemove', (event) => {
 /* sketch2image api 1*/
 // app.js
 
-//const generatedImage = document.getElementById("generatedImage");
+const generatedImage = document.getElementById("generatedImage");
 //const croppedCanvas = document.getElementById("croppedCanvas");
 const ratioInputs = document.querySelectorAll('input[name="frame-size"]');
 const cropButton = document.getElementById("cropButton");
@@ -68,11 +67,27 @@ const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
 const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
 
 const generateImage = async () => {
-    //let canvasData = canvas_sketch.toDataURL('image/jpeg');
-    //let blob = await fetch(canvasData).then(res => res.blob());
+    let canvasData = canvas_sketch.toDataURL('image/jpeg');
+    let blob = await fetch(canvasData).then(res => res.blob());
 
     /*시도1*/
-    canvas.toBlob()
+    // canvas.toBlob(function(blob){
+    //     let form = new FormData();
+    //     form.append('sketch_file', blob);
+    //     form.append('prompt', inputElement.value)
+    //     fetch(API_URL, {
+    //         method: 'POST',
+    //         headers: {
+    //             'x-api-key': API_KEY,
+    //         },
+    //         body: form,
+    //     })
+    //     .then(response => response.arrayBuffer())
+    //     .then(buffer => {
+
+    //     })
+    // }
+    // )
     
 
     let form = new FormData();
