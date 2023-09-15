@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{% url 'stylegen' %}" enctype="multipart/form-data">
+            <form id=radioForm method="POST" action="{% url 'stylegen' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class = "content">
                     <div>
@@ -58,7 +58,7 @@
                                     <img src="" alt="미리보기 이미지" class="preview">
                                 </div>
                                 <label class="file-label" for="chooseFile">Choose File</label>
-                                <input class="file" id="chooseFile" type="file" name="content_image" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg" required>
+                                <input type="file" class="file" id="chooseFile" name="content_image" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg">
                             </div>
                         
                             
@@ -82,7 +82,7 @@
                                         <input type="radio" name="image-card" value="c_sample_04.jpg">
                                         <img class="thumnail" src="{% static 'img/thum_c_04.jpeg' %}" alt="" />
                                     </label>
-
+                                    <input type="hidden" name="content_selected_image" id="content_selected_image" value="">
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                 <img src="" alt="미리보기 이미지" class="preview">
                             </div>
                             <label class="file-label" for="chooseFile2">Choose File</label>
-                            <input class="file" id="chooseFile2" type="file" name="style_image" onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg" required>
+                            <input class="file" id="chooseFile2" type="file" name="style_image" onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg">
                         </div>
                         <div class="container">
                             <div class="cards">
@@ -123,7 +123,7 @@
                                     <input type="radio" name="image-card2" value="s_sample_04.jpeg">
                                     <img class="thumnail" src="{% static 'img/thum_s_04.jpeg' %}" alt="" />
                                 </label>
-                                
+                                <input type="hidden" name="style_selected_image" id="style_selected_image" value="">
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                 </div>
 
 
-                <div>
+                <!-- <div>
                     <h2 class="title2">Frame size</h2>
                     <div class="frame-buttons">
                         <div class="phoneframe" style="margin-bottom: 30px;">
@@ -217,16 +217,17 @@
                                 <input type="radio" name="frame-size" value="162x197">
                                 <span>Apple Watch 40mm</span>
                             </label>
+                            
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div>
                     <h2 class="comment-head" style="margin-top:100px">Email Address</h2>
-                    <textarea id="email" class="textarea" name="email" rows=5 placeholder=""></textarea>
                 </div>
                 <div class="generate" style="text-align: center; margin-top: 100px;">
-                    <input type="submit" class="button-generate" value="Generate!">
+                    <input type="submit" class="button-generate" value="Generate!" onclick="">
                 </div>
+
             </form>
 
             <div class="result-image">
@@ -246,81 +247,6 @@
 
             
             <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-            <script>
-                function goToScroll(name) {
-                    var location = document.querySelector("." + name).offsetTop;
-                    window.scrollTo({top: location, behavior: 'smooth'});
-                }
-                function DropFile(dropAreaId, fileListId) {
-                    let dropArea = document.getElementById(dropAreaId);
-                    let fileList = document.getElementById(fileListId);
-
-                    function preventDefaults(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-
-                    function highlight(e) {
-                        preventDefaults(e);
-                        dropArea.classList.add("highlight");
-                    }
-
-                    function unhighlight(e) {
-                        preventDefaults(e);
-                        dropArea.classList.remove("highlight");
-                    }
-
-                    function handleDrop(e) {
-                        unhighlight(e);
-                        let dt = e.dataTransfer;
-                        let files = dt.files;
-
-                        handleFiles(files);
-
-                        const fileList = document.getElementById(fileListId);
-                        if (fileList) {
-                            fileList.scrollTo({ top: fileList.scrollHeight });
-                        }
-                    }
-
-                    function handleFiles(files) {
-                        files = [...files];
-                        // files.forEach(uploadFile);
-                        files.forEach(previewFile);
-                    }
-
-                    function previewFile(file) {
-                        console.log(file);
-                        renderFile(file);
-                    }
-
-                    function renderFile(file) {
-                        let reader = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onloadend = function () {
-                            let img = dropArea.getElementsByClassName("preview")[0];
-                            img.src = reader.result;
-                            img.style.display = "block";
-                        };
-                    }
-
-                    dropArea.addEventListener("dragenter", highlight, false);
-                    dropArea.addEventListener("dragover", highlight, false);
-                    dropArea.addEventListener("dragleave", unhighlight, false);
-                    dropArea.addEventListener("drop", handleDrop, false);
-
-                    return {
-                        handleFiles
-                    };
-                }
-
-                const dropFile = new DropFile("drop-file", "files");
-                const dropFile2 = new DropFile("drop-file2", "files2");
-                
-
-                
-            </script>
-
 
         </section>
             

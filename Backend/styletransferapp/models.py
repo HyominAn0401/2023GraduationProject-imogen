@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class UserImage(models.Model):
+    print("hihi")
     content_image = models.ImageField(upload_to='image/content/')
     style_image = models.ImageField(upload_to='image/style/')
     created = models.DateTimeField(auto_now_add=True)

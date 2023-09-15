@@ -36,7 +36,7 @@ def get_secret(setting, secrets=secrets):
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1029384756qwerty'
+SECRET_KEY = get_secret("secretKey")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

@@ -14,6 +14,7 @@ from django.conf import settings
 
 # 이미지 모델 저장 비동기 함수
 async def save_user_image(content_image, style_image):
+    print(6)
     user_image = UserImage(content_image=content_image, style_image=style_image)
     user_image.save()
     return user_image
@@ -40,14 +41,59 @@ async def process_image_and_send_email(user_image, email_address):
 async def upload_image(request):
     device = torch.device('mps:0' if torch.backends.mps.is_available() else 'cpu')
     if request.method == 'POST':
-        content_image = request.FILES['content_image']
-        style_image = request.FILES['style_image']
+        print(1)
+        content_image = request.FILES.get('content_image',None)
+        print(2)
+        style_image = request.FILES.get('style_image',None)
+        if content_image:
+            print(3.1)
+            print(content_image)
+        else:
+            print("No uploaded content image.")
+        if style_image:
+            print(style_image)
+        else:
+            print("No uploaded style image")
 
         #폼 데이터에서 이메일 주소
         email_address = request.POST.get('email')
+        if email_address:
+            print(f'email address: {email_address}')
+        else:
+            print("No email address")
+
+        # 샘플 이미지파일 이름 가져오기
+        content_selected_image = request.POST.get('content_selected_image',None)
+        print(4)
+        style_selected_image = request.POST.get('style_selected_image',None)
+        print(5)
+
+        # content 이미지 경로 설정
+        if content_selected_image:
+            print(type(content_selected_image))
+            print(f'content_selected_image from RadioBtn:{content_selected_image}hehehe')
+            print('root: ', settings.STATICFILES_DIRS)
+            content_image_path = os.path.join(settings.STATICFILES_DIRS[0], 'img', content_selected_image)
+            #content_image_path = os.path.join('img', content_selected_image)
+            print(content_image_path)
+        else:
+            content_image_path = os.path.join(settings.MEDIA_ROOT, 'image/content', content_image)
+            print("content_image from upload:", content_image_path)
+
+        # style 이미지 경로 설정
+        if style_selected_image:
+            style_image_path = os.path.join(settings.STATICFILES_DIRS[0], 'img', style_selected_image)
+            #style_image_path = os.path.join('img', style_selected_image)
+            print("style_selected_image from RadioBtn: ", style_selected_image)
+        else:
+            style_image_path = os.path.join(settings.MEDIA_ROOT, 'image/style', style_image)
+            print(f'style_image from upload: {style_image_path}')
+        print('1', content_image_path)
+        print('2', style_image_path)
 
         # 이미지 저장 비동기 함수를 직접 await로 호출
-        user_image = await save_user_image(content_image, style_image)
+        user_image = await save_user_image(content_image_path, style_image_path)
+        print(7)
 
         # 비동기로 이미지 생성 및 이메일 전송 작업 실행
         await process_image_and_send_email(user_image, email_address)
