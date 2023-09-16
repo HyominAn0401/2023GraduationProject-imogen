@@ -18,8 +18,11 @@ var RadioInputStyleImage = document.getElementById("styleRadioInput")
 document.querySelectorAll('input[name="content-image"]').forEach(function(radio) {
     radio.addEventListener("change", function() {
         uploadedContentImage.value = null;
-        console.log(uploadedContentImage.files[0])
+        //uploadedContentImage.files = null;
+        console.log(uploadedContentImage.value)
         RadioInputContentImage.value = document.querySelector('input[name="content-image"]:checked').value;
+        console.log(RadioInputContentImage.value)
+        document.getElementById('preview1').src = RadioInputContentImage.src
     });
 });
 
@@ -27,7 +30,8 @@ document.querySelectorAll('input[name="content-image"]').forEach(function(radio)
 document.querySelectorAll('input[name="style-image"]').forEach(function(radio) {
     radio.addEventListener("change", function() {
         uploadedStyleImage.value = null;
-        console.log(uploadedStyleImage.files[0])
+        //uploadedStyleImage.files = null;
+        console.log(uploadedStyleImage.value)
         RadioInputStyleImage.value = document.querySelector('input[name="style-image"]:checked').value;
     });
 });
@@ -37,8 +41,11 @@ uploadedContentImage.addEventListener("change", function () {
     document.querySelectorAll('input[name="content-image"]').forEach(function(radio) {
         radio.checked = false;
     });
+    console.log(uploadedContentImage.value)
     if (RadioInputContentImage.value){
-        RadioInputContentImage.value = null;
+        RadioInputContentImage.value = "";
+        console.log(RadioInputContentImage.value)
+
     }
 });
 
