@@ -2,9 +2,10 @@ from django.db import models
 
 # Create your models here.
 class UserImage(models.Model):
-    print("hihi")
-    content_image = models.ImageField(upload_to='image/content/')
-    style_image = models.ImageField(upload_to='image/style/')
+    content_image = models.ImageField(upload_to='image/content/', null=True)
+    style_image = models.ImageField(upload_to='image/style/', null=True)
+    content_selected_image = models.CharField(max_length=255, null=True)
+    style_selected_image = models.CharField(max_length=255, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
