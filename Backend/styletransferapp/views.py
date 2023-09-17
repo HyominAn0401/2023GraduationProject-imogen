@@ -27,7 +27,7 @@ async def send_email_with_image(email_address, generated_image_path):
         [email_address],
     )
     email.attach_file(generated_image_path)
-    await email.send()
+    email.send()
 
 # 이미지 생성 및 이메일 전송 비동기 함수
 async def process_image_and_send_email(user_image, email_address):
