@@ -19,6 +19,16 @@ async def save_user_image(content_image, style_image, content_selected_image_pat
     user_image.save()
     return user_image
 
+async def send_email_with_image(email_address, generated_image_path):
+    email = EmailMessage(
+        'StyleTransfer 완료',
+        'Style Transfer가 완료되었습니다. 첨부파일을 확인해주세요.',
+        settings.EMAIL_HOST_USER,
+        [email_address],
+    )
+    email.attach_file(generated_image_path)
+    await email.send()
+
 # 이미지 생성 및 이메일 전송 비동기 함수
 async def process_image_and_send_email(user_image, email_address):
     print(7)
@@ -30,7 +40,6 @@ async def process_image_and_send_email(user_image, email_address):
     # 2. content_image 업로드 & style_image 샘플
     elif user_image.content_image and user_image.style_selected_image:
         generated_image = generate_style_transfer_image(user_image.content_image.path, user_image.style_selected_image)
-
     # 3. content_image 샘플 & style_image 업로드
     elif user_image.content_selected_image and user_image.style_image:
         generated_image = generate_style_transfer_image(user_image.style_selected_image, user_image.style_image.path)
@@ -50,16 +59,14 @@ async def process_image_and_send_email(user_image, email_address):
             settings.EMAIL_HOST_USER,
             [email_address],
         )
-        email.attach_file(generated_image_path)
-        email.send()
+        
+        await send_email_with_image(email_address, generated_image_path)
 
 # 비동기 이미지 처리 뷰
 @async_to_sync
 async def upload_image(request):
     device = torch.device('mps:0' if torch.backends.mps.is_available() else 'cpu')
-    print(1)
     if request.method == 'POST':
-        print(2)
         content_image = request.FILES.get('content_image',None)
         style_image = request.FILES.get('style_image',None)
         print(f'content, style image: {content_image}, {type(content_image)}')
@@ -77,7 +84,6 @@ async def upload_image(request):
         print(6)
         print(user_image)
         print(user_image.content_selected_image)
-
 
         # 비동기로 이미지 생성 및 이메일 전송 작업 실행
         await process_image_and_send_email(user_image, email_address)
