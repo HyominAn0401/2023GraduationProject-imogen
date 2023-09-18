@@ -237,6 +237,9 @@
                 
                 <div id="mapcontents">
                     <img src="{{ generated_image_model.generated_image.url }}" id="result-image">
+                    <a href="{{ generated_image_model.generated_image.url }}" download="image"><button id="downloadButton" class="button" style="display: none;">Download Image</button></a>
+                    <button id="shareImageButton" class="button" style="display: none;">Share Image</button>
+                    
                     
                     <!-- <span id="dragsrc" style="display:block">                       
                     </span>
