@@ -3,18 +3,26 @@
 
 
 @font-face{
-	font-family: "NotoSans";
-	src : url("font/NotoSans-Regular.eot"); /* IE */
+	font-family: "NotoSans-Regular";
+	src : url("../font/NotoSans-Regular.eot"); /* IE */
 	src:local('☺'), 
-	url("font/NotoSans-Regular.woff") format("woff"), /* FF, CH */
-    url("font/NotoSans-Regular.ttf") format("truetype"); /* FF, CH, SF, OP */
+	url("../font/NotoSans-Regular.woff") format("woff"), /* FF, CH */
+    url("../font/NotoSans-Regular.ttf") format("truetype"); /* FF, CH, SF, OP */
 }
 @font-face{
-	font-family: "Squaremaze";
-	src : url("font/Squaremaze.eot"); /* IE */
+	font-family: "NotoSans-Italic";
+	src : url("../font/NotoSans-Italic.eot"); /* IE */
 	src:local('☺'), 
-	url("font/Squaremaze.woff") format("woff"), /* FF, CH */
-    url("font/Squaremaze.ttf") format("truetype"); /* FF, CH, SF, OP */
+	url("../font/NotoSans-Italic.woff") format("woff"), /* FF, CH */
+    url("../font/NotoSans-Italic.ttf") format("truetype"); /* FF, CH, SF, OP */
+}
+
+@font-face{
+	font-family: "Squaremaze";
+	src : url("../font/Squaremaze.eot"); /* IE */
+	src:local('☺'), 
+	url("../font/Squaremaze.woff") format("woff"), /* FF, CH */
+    url("../static/font/Squaremaze.ttf") format("truetype"); /* FF, CH, SF, OP */
 }
 /*common*/
 .wrapper{width: 1100px; margin: 0 auto;}
@@ -95,10 +103,11 @@ footer #copyright{
 }
 .title2{
     line-height: 150px;
-    font-size:40px; font-weight: bold;
+    font-size:40px; font-weight: 600;
     padding-bottom:0px;
     margin-bottom:5px;
-    color:#262A2D
+    color:#262A2D;
+    font-family:"NotoSans-Regular"
 }
 
 .article{
@@ -176,7 +185,7 @@ hr.line1{
     background-color:#B4C8BB;
     color:#ffffff;
     box-shadow: none;
-    font-family: "Noto Sans KR";font-size:16px;font-weight: bold;
+    font-family: "NotoSans-Regular";font-size:16px;font-weight: bold;
     border-radius: 20px; border-color:#B4C8BB;border-style: solid;
     margin-bottom: 5px;
 }
@@ -196,7 +205,7 @@ hr.line1{
     background-color:#262A2D;
     color:#ffffff;
     box-shadow: none;
-    font-family: "Noto Sans KR";font-size:25px;font-weight: bold;
+    font-family: "NotoSans-Regular";font-size:25px;font-weight: bold;
     border-radius: 20px; border-color:#262A2D;border-style: solid;
     margin-bottom: 5px;
 }
@@ -217,7 +226,7 @@ hr.line1{
     background-color:#B4C8BB;
     color:#ffffff;
     box-shadow: none;
-    font-family: "Noto Sans KR";font-size:16px;font-weight: bold;
+    font-family: "NotoSans-Regular";font-size:16px;font-weight: bold;
     border-radius: 20px; border-color:#B4C8BB;border-style: solid;
     margin-bottom: 5px;
 }
@@ -323,11 +332,11 @@ hr.line1{
   .comment-head{
       font-size:25px;
       color: #262A2D;
-      font-family: "Noto Sans KR";
+      font-family: "NotoSans-Regular";
       padding:0px;
   }
   #comments-count{
-      font: size 25px;
+      font-size :25px;
       color :#B4C8BB;
   }
   .textarea{
@@ -336,8 +345,17 @@ hr.line1{
       resize:none;
       padding: 20px;
       margin-bottom: 20px;
-      border: 1px solid #E7E3E3;
-      font-family: "Noto Sans KR"; font-size:16px; color:#262A2D;
+      border-bottom: 1px solid #E7E3E3;
+      border-left:0;
+      border-right: 0;
+      border-top:0;
+      color:#262A2D;
+      font-family: "NotoSans-Italic"; font-size:16px; 
+  }
+  .textarea:focus{
+    outline: none;
+    font-family:"NotoSans-Regular"
+    /* border-bottom: 2px solid #262A2D; */
   }
   ::placeholder{
     color:#E7E3E3;
@@ -519,4 +537,56 @@ img{
 }
 #output {
   margin: 5px;
+}
+
+/*popup modal*/
+.popup .overlay{
+  position:fixed;
+  display: none;
+  top:0px;
+  left:0px;
+  width: 100vw;
+  height: 100vw;
+  background:rgba(0,0,0,0.7);
+  z-index: 1;
+  
+}
+
+.popup .content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%) scale(0);
+  background:#fff;
+  width:840px;
+  height:400px;
+  z-index:99999;
+  padding:20px;
+  box-sizing: border-box;
+  color:#262A2D
+}
+.popup .close-btn{
+  cursor:pointer;
+  position:absolute;
+  right:20px;
+  top:20px;
+  width:30px;
+  height:30px;
+  color:#E7E3E3;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+}
+.popup .close-btn::after{
+  content: "\00d7"; font-size:25pt;
+}
+
+.popup.active .overlay{
+  display:block;
+}
+.popup.active .content{
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale(1);
 }

@@ -223,7 +223,7 @@
                 </div> -->
                 <div>
                     <h2 class="comment-head" style="margin-top:100px">Email Address</h2>
-                    <textarea id="email" class="textarea" name="email" rows=5 placeholder=""></textarea>
+                    <textarea id="email" class="textarea" name="email" rows=5 placeholder="abc123@gmail.com"></textarea>
                 </div>
                 <div class="generate" style="text-align: center; margin-top: 100px;">
                     <input type="submit" class="button-generate" value="Generate!" onclick="">
@@ -237,8 +237,21 @@
                 
                 <div id="mapcontents">
                     <img src="{{ generated_image_model.generated_image.url }}" id="result-image">
-                    <a href="{{ generated_image_model.generated_image.url }}" download="image"><button id="downloadButton" class="button" style="display: none;">Download Image</button></a>
-                    <button id="shareImageButton" class="button" style="display: none;">Share Image</button>
+                    <a href="{{ generated_image_model.generated_image.url }}" download="image"><button id="downloadButton" class="button">Download Image</button></a>
+                    <button id="toggleButton" class="button">Share Image</button>
+
+                    <div id="popups">
+                        <div class="popup" id="popup-1">
+                            <div class="overlay"></div>
+                            <div class="content">
+                                <div class="close-btn" onclick="togglePopup('popup-1')"></div>
+                                <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
+                                <textarea id="email2" class="textarea" name="email2" rows=5 placeholder="abc123@gmail.com"></textarea>
+                                <button id="submit" class="button" style="float:right">보내기</button>
+                            </div>
+                        </div>
+                    </div>
+
                     
                     
                     <!-- <span id="dragsrc" style="display:block">                       

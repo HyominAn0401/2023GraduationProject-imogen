@@ -477,4 +477,24 @@ function checkImageGeneration() {
 }
 
 // 일정한 간격으로 이미지 생성 여부 확인
-setInterval(checkImageGeneration, 3000); // 3초마다 확인
+// setInterval(checkImageGeneration, 3000); // 3초마다 확인
+
+
+
+/* 이메일 보내기 버튼 */
+function togglePopup(popupId) {
+    var popup = document.getElementById(popupId);
+    popup.classList.toggle("active");
+}
+
+function Popup(popupId_val) {
+    this.popupId = popupId_val;
+}
+
+// 팝업 객체 생성
+var popup = new Popup("popup-1");
+
+// 팝업 토글 예시
+document.getElementById("toggleButton").addEventListener("click", function() {
+    togglePopup(popup.popupId);
+});
