@@ -454,30 +454,38 @@ uploadedStyleImage.addEventListener("change", function () {
 });
 
 
-/* 다운로드 버튼 */
-// 이미지 생성 여부 확인을 위한 함수
-function checkImageGeneration() {
-    // 서버에 AJAX 요청을 보냄
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/check_image_generation_endpoint', true);   //서버의 엔드포인트...뭔지 모르겠음.
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // 이미지가 생성되었는지 확인
-            var response = JSON.parse(xhr.responseText);
-            if (response.imageGenerated) {
-                // 이미지가 생성되었다면 이미지 표시
-                //document.getElementById("resultImage").src = response.imageUrl;
+// /* 다운로드 버튼 */
+// // 이미지 생성 여부 확인을 위한 함수
+// function checkImageGeneration() {
+//     // 서버에 AJAX 요청을 보냄
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', '/check_image_generation_endpoint', true);   //서버의 엔드포인트...뭔지 모르겠음.
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === 4 && xhr.status === 200) {
+//             // 이미지가 생성되었는지 확인
+//             var response = JSON.parse(xhr.responseText);
+//             if (response.imageGenerated) {
+//                 // 이미지가 생성되었다면 이미지 표시
+//                 //document.getElementById("resultImage").src = response.imageUrl;
                 
-                // 다운로드 버튼 표시
-                document.getElementById("downloadButton").style.display = "block";
-            }
-        }
-    };
-    xhr.send();
-}
+//                 // 다운로드 버튼 표시
+//                 document.getElementById("downloadButton").style.display = "block";
+//             }
+//         }
+//     };
+//     xhr.send();
+// }
 
 // 일정한 간격으로 이미지 생성 여부 확인
 // setInterval(checkImageGeneration, 3000); // 3초마다 확인
+
+//generate image 생성시
+function imageLoaded(){
+    document.getElementById("downloadLink").style.display="block";
+    document.getElementById("toggleButton").style.display="block";
+}
+var resultImage = document.getElementById("result-image")
+resultImage.onload = imageLoaded;
 
 
 

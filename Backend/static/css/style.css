@@ -24,6 +24,7 @@
 	url("../font/Squaremaze.woff") format("woff"), /* FF, CH */
     url("../static/font/Squaremaze.ttf") format("truetype"); /* FF, CH, SF, OP */
 }
+
 /*common*/
 .wrapper{width: 1100px; margin: 0 auto;}
 .clearfix{content:""; display:block; clear:both;}
@@ -54,9 +55,11 @@ nav{
     color:#E7E3E3; 
     padding : 0 15px; 
     display: block; 
+    font-family: 'Noto Sans', sans-serif;
     font-size:20px; font-weight:bold; 
     text-decoration: none;
-    letter-spacing:3px;}
+    letter-spacing: 2px;
+    }
 
 .menu a:hover{
     width:100%;
@@ -94,20 +97,23 @@ footer #copyright{
 .title{
     text-align: center;
     line-height: 150px;
-    font-size:75px; font-weight: bold;
+    font-size:75px;
     padding-bottom:0px;
-
+    font-weight: 600;
+    font-family: 'Noto Sans', sans-serif;
     margin-bottom:5px;
     color:#262A2D
 
 }
 .title2{
     line-height: 150px;
-    font-size:40px; font-weight: 600;
+    font-size:40px;
     padding-bottom:0px;
     margin-bottom:5px;
     color:#262A2D;
-    font-family:"NotoSans-Regular"
+    /* font-family:"NotoSans-Regular" */
+    font-family: 'Noto Sans', sans-serif;
+    letter-spacing: -0.05rem;
 }
 
 .article{
@@ -116,6 +122,7 @@ footer #copyright{
     line-height: 180%;
     color:#262A2D;
     text-align:left;
+    font-family: "NotoSans-Regular";
 }
 
 .contact{
@@ -278,6 +285,7 @@ hr.line1{
   }
   .contents .upload-box .drag-file .message {
     margin-bottom: 0;
+    font-family:"NotoSans-Regular"
   }
   .contents .upload-box .drag-file .preview {
     display: none;
@@ -296,6 +304,7 @@ hr.line1{
     width: 256px;
     border-radius: 6px;
     cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
   }
   .contents .upload-box .file {
     display: none;
