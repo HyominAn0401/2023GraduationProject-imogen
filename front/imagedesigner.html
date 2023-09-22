@@ -30,13 +30,14 @@
         <div class="wrapper">            
             <section id="aboutme">
                 <div>
-                <h2 class = "title">Text<span style="color:#B4C8BB">2Image</span></h2>
+                <h2 class = "title">Image<span style="color:#B4C8BB">Designer</span></h2>
                     <p class="article" >
-                        Text To Image는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br><br>
+                        Image Designer는 사용자가 이미지를 쉽게 편집하고 디자인할 수 있는 웹 플랫폼입니다.<br><br>
                         
-                        원하는 배경화면이 어떤 모습인지 말해주세요! Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.<br><br>
+                        이 웹 페이지는 다양한 이미지 편집 도구와 함께 사용자 친화적인 인터페이스를 제공하여 
+                        누구나 손쉽게 이미지를 디자인할 수 있습니다.<br><br>
     
-                        프롬프트를 입력하고 생성 버튼을 클릭하세요. 이미지를 생성하는 데 특별한 코드가 필요하지 않습니다. 지금 당장 놀라운 예술 작품을 만들어보세요!<br><br>
+                        이미지를 편집하고 생성 버튼을 클릭하세요. 이미지를 생성하는 데 특별한 코드가 필요하지 않습니다. 지금 당장 놀라운 예술 작품을 만들어보세요!<br><br>
                     </p>
                     <div style="text-align: center;">
                         <button class="button" type="button" onclick= "goToScroll('button')">Get Started</button>
@@ -45,7 +46,7 @@
 
             </section>
             
-            <section id="aboutme" class="input-container">
+            <!-- <section id="aboutme" class="input-container">
                 <div>
                     <h2 class="comment-head">Prompt</h2>
                     <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="ex. A cute cat in a red house"></textarea>
@@ -54,22 +55,17 @@
                     <h2 class="comment-head">Negative Prompt</h2>
                     <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="ex. scary, dirty"></textarea>
                 </div>
-                <script>
-                    function goToImageDesigner() {
-                        const imageUrl = document.getElementById('generatedImage').src; // 'generatedImage'는 이미지를 표시하는 img 태그의 ID입니다.
-                        window.location.href = `imagedesigner.html?image_url=${encodeURIComponent(imageUrl)}`;
-                    }
-                    </script>
-                    
+                 -->
                 
                 <div id="submit-icon">
-                    <button id="text2imgBtn" class="button-generate" type="submit" onclick="">Generate!</button>
-                    <button onclick="goToImageDesigner()">Go to ImageDesigner</button>
-
+                    <!-- <button id="text2imgBtn" class="button-generate" type="submit" onclick="">Generate!</button> -->
                 </div>
                 <div id ="submit"></div>
             </section>
 
+            <!-- 이미지를 표시할 곳 -->
+            <img id="fetchedImage" src="" alt="Fetched Image">
+            
 
             <section id="aboutme" class="image-section" style="display: block;">
                 <div style="margin-bottom: 50px;">
@@ -188,7 +184,12 @@
                                     <button id="saturation">Saturation</button>
                                     <button id="inversion">Inversion</button>
                                     <button id="grayscale">Grayscale</button>
+                                    <button id="inversion">inversion</button>
+                                    
                                 </div>
+
+                                
+
                                 <div class="slider">
                                     <div class="filter-info">
                                         <p class="name">Brightness</p>
@@ -214,7 +215,7 @@
             </section>
             <script src="apikey.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.min.js"></script>
-            <script type = "text/javascript" src="app3.js">
+            <script type = "text/javascript" src="imagedesigner.js">
                 
 
 
@@ -273,3 +274,4 @@
     </div>
     </body>
 </html>
+

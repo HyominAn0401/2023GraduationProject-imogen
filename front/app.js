@@ -1,5 +1,32 @@
-/*
- * get started button  누르면 아래로 스크롤 되는 함수
+/* papago 번역 api
+const PAPAGO_API_ENDPOINT = "https://openapi.naver.com/v1/papago/n2mt";
+const CLIENT_ID = "QCj7kGXAcHcexd7vvQHy";
+const CLIENT_SECRET = "StMNMqi6ak";
+
+async function translateToEnglish(text) {
+    const formData = new URLSearchParams();
+    formData.append('source', 'ko');
+    formData.append('target', 'en');
+    formData.append('text', text);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-Naver-Client-Id": CLIENT_ID,
+            "X-Naver-Client-Secret": CLIENT_SECRET
+        },
+        body: formData
+    };
+
+    const response = await fetch(PAPAGO_API_ENDPOINT, requestOptions);
+    const data = await response.json();
+
+    return data.message.result.translatedText;
+}*/
+
+
+ /* get started button  누르면 아래로 스크롤 되는 함수
  * @param {any} name
  */
 function goToScroll(name) {
@@ -24,8 +51,64 @@ const inputElement = document.querySelector("#prompt");
 const NinputElement = document.querySelector('#negative-prompt');
 
 let cropper;
+const PAPAGO_API_ENDPOINT = "/v1/papago/n2mt";
+const CLIENT_ID = "QCj7kGXAcHcexd7vvQHy";
+const CLIENT_SECRET = "StMNMqi6ak";
 
-const getImage = async () => {
+async function translateToEnglish(text) {
+    const formData = new URLSearchParams();
+    formData.append('source', 'ko');
+    formData.append('target', 'en');
+    formData.append('text', text);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-Naver-Client-Id": CLIENT_ID,
+            "X-Naver-Client-Secret": CLIENT_SECRET
+        },
+        body: formData
+    };
+
+const response = await fetch(PAPAGO_API_ENDPOINT, requestOptions);
+const data = await response.json();
+
+return data.message.result.translatedText;
+}
+
+async function getImage() {
+    const promptText = document.querySelector("#prompt").value;
+    const negativePromptText = document.querySelector('#negative-prompt').value;
+    // 번역
+    const translatedPrompt = await translateToEnglish(promptText);
+    const translatedNegativePrompt = await translateToEnglish(negativePromptText);
+    // const PAPAGO_API_ENDPOINT = "https://openapi.naver.com/v1/papago/n2mt";
+    // const CLIENT_ID = "QCj7kGXAcHcexd7vvQHy";
+    // const CLIENT_SECRET = "StMNMqi6ak";
+
+//     async function translateToEnglish(text) {
+//         const formData = new URLSearchParams();
+//         formData.append('source', 'ko');
+//         formData.append('target', 'en');
+//         formData.append('text', text);
+
+//         const requestOptions = {
+//             method: 'POST',
+//             headers: {
+//                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+//                 "X-Naver-Client-Id": CLIENT_ID,
+//                 "X-Naver-Client-Secret": CLIENT_SECRET
+//             },
+//             body: formData
+//         };
+
+//     const response = await fetch(PAPAGO_API_ENDPOINT, requestOptions);
+//     const data = await response.json();
+
+//     return data.message.result.translatedText;
+// }
+
     const options = {
         method: "POST",
         headers:{
@@ -33,8 +116,8 @@ const getImage = async () => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            "prompt": inputElement.value,
-            "negative_prompt": NinputElement.value,
+            "prompt": translatedPrompt,
+            "negative_prompt": translatedNegativePrompt,
             "width": 512,
             "samples": 1,
             "upscale": true,
@@ -98,8 +181,8 @@ const getImage = async () => {
         console.error(error);
     }
 };
-
-submitIcon.addEventListener('click', getImage);
+document.querySelector(".button-generate").addEventListener('click', getImage);
+//submitIcon.addEventListener('click', getImage);
 
 function getSelectedRatio(){
     // 선택된 라디오 버튼의 값에 따라 적절한 비율 반환

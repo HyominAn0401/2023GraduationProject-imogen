@@ -39,6 +39,30 @@ canvas_sketch.addEventListener('mousemove', (event) => {
     ctx.moveTo(x, y);
 });
 
+// draw canvas 부분 바로 아래에 추가
+let isErasing = false;
+let eraserButton = document.getElementById('eraser');
+let lineWidthSlider = document.getElementById('lineWidthSlider');
+
+lineWidthSlider.addEventListener('input', () => {
+    if (isErasing) {
+        ctx.globalCompositeOperation = 'source-over';
+        isErasing = false;
+    }
+    ctx.lineWidth = lineWidthSlider.value;
+});
+
+eraserButton.addEventListener('click', () => {
+    if (isErasing) {
+        ctx.globalCompositeOperation = 'source-over';
+        isErasing = false;
+    } else {
+        ctx.globalCompositeOperation = 'destination-out';
+        isErasing = true;
+    }
+});
+
+
 // Generate JPEG image from the canvas
 // function saveImagetoJpg() {
 //     let dataURL = canvas.toDataURL('image/jpeg'); // Convert canvas content to JPEG
@@ -68,11 +92,11 @@ const API_URL =' https://clipdrop-api.co/sketch-to-image/v1/sketch-to-image';
 const API_KEY = '411f71385cad312ce1772dc4b37c377c794a8da4352b904c0459318f2c75ecae19a8c9b48e329d1b5a5c976162add4d1';
 
 const generateImage = async () => {
-    //let canvasData = canvas_sketch.toDataURL('image/jpeg');
-    //let blob = await fetch(canvasData).then(res => res.blob());
+    let canvasData = canvas_sketch.toDataURL('image/jpeg');
+    let blob = await fetch(canvasData).then(res => res.blob());
 
     /*시도1*/
-    canvas.toBlob()
+    //canvas.toBlob()
     
 
     let form = new FormData();
