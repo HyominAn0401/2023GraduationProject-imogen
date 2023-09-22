@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,9 +24,9 @@
                 <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1> <!--LOGO squaremaze 글자체 적용시켜야함-->
                 
                 <ul class="menu">
-                    <li><a href=".html">Function1</a></li>
-                    <li><a href="motiongen.html">MotionGen</a></li>
-                    <li><a href="text2img.html">Text2ImaGen</a></li>
+                    <li><a href="./styletransfer.html">StyleTransfer</a></li>
+                    <li><a href="./text2img.html">Text2Imagen</a></li>
+                    <li><a href="./imageEdit.html">ImageEdit</a></li>
                     <li><a href=".html">Function4</a></li>
                 </ul>
             </div>
@@ -69,142 +70,30 @@
 
             <section id="aboutme" class="image-section" style="display: block;">
                 <div style="margin-bottom: 50px;">
-                    <h2 class="comment-head">Frame size</h2>
-                    <form>
-                    <div class="frame-buttons">
-                        <div class="phoneframe" style="margin-bottom: 30px;">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="390x844">
-                                <span>iPhone 14</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="393x852">
-                                <span>iPhone 14 Pro</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="428x926">
-                                <span>iPhone 14 Plus</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="428x932">
-                                <span>iPhone 14 Pro Max</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="390x844">
-                                <span>iPhone 13 / 13 Pro</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="375x812">
-                                <span>iPhone 13 mini</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="320x568">
-                                <span>iPhone SE</span>
-                            </label>
-                        </div>
-                        <div class="tabletframe" style="margin-bottom: 30px;">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1440x960">
-                                <span>iSurface Pro 8</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="744x1133">
-                                <span>iPad mini 8.3</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="834x1194">
-                                <span>iPad Pro 11"</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1024x1366">
-                                <span>iPad Pro 12.9"</span>
-                            </label>
-                        </div>
-                        <div class="desktopframe" style="margin-bottom: 30px;">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="640x416"> <!--1280x832-->
-                                <span>1280 x 832</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1512x982">
-                                <span>1512 x 982</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1728x1117">
-                                <span>1728 x 1117</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1440x1024">
-                                <span>1440 x 1024</span>
-                            </label>
-                        </div>
-                        <div class="watchframe">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="176x215">
-                                <span>Apple Watch 41mm</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="198x242">
-                                <span>Apple Watch 45mm</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="368x448"><!--184x224-->
-                                <span>Apple Watch 44mm</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="162x197">
-                                <span>Apple Watch 40mm</span>
-                            </label>
-                        </div>
-                    </div></form>
+                    <h2 id="result" class="comment-head" style="display: block;">Result</h2>
                 </div>
-                <!--<h2 id="result" class="comment-head" style="display: block;">Result</h2>-->
-                <div class="container-cropper">
-                    <div>
-                        <img id="image" src="./img/0.png">
-                        <button id="cropImageBtn">Crop Image</button>
-                    </div>
-                    <img src="" id="output">
-                </div>
-        
-                <div class="container2 disable">
-                    <h2>Image Editor</h2>
-                    <div class = "wrapper-imgeditor"> <!--이미 style sheet에 존재-->
-                        <div class="editor-panel">
-                            <div class="filter">
-                                <label class="title3">Filters</label> <!--이미 style sheet에 존재-->
-                                <div class="options">
-                                    <button id="brightness" class="active">Brightness</button>
-                                    <button id="saturation">Saturation</button>
-                                    <button id="inversion">Inversion</button>
-                                    <button id="grayscale">Grayscale</button>
-                                </div>
-                                <div class="slider">
-                                    <div class="filter-info">
-                                        <p class="name">Brightness</p>
-                                        <p class="value">100%</p>
-                                    </div>
-                                    <input type="range" value="100" min="0" max="200">
+                <div id="image-div"></div>
+                <div id="botton-container">
+                    <a href="" download="image" id="downloadLink" style="display: none;"><button id="downloadButton" class="button">Download Image</button></a>
+                        <button id="toggleButton" class="button" style="display: none;">Share Image</button>
+                        <button id="imageEditButton" class="button" style="display:none;">Edit Image</button>
+
+                        <div id="popups">
+                            <div class="popup" id="popup-1">
+                                <div class="overlay"></div>
+                                <div class="content">
+                                    <div class="close-btn" onclick="togglePopup('popup-1')"></div>
+                                    <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
+                                    <textarea id="email2" class="textarea" name="email2" rows=5 placeholder="abc123@gmail.com"></textarea>
+                                    <button id="submit" class="button" style="float:right">보내기</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="preview-img">
-                            <img src="https://codingnepalweb.com/demos/image-editor-javascript/image-placeholder.svg" alt="preview-img">
-                        </div>
-                        <div class="controls">
-                            <button class="reset-filter">Reset Filters</button>
-                            <div class="row">
-                                <input type="file" class="file-input" accept="image/*" hidden>
-                                <button class="choose-img">Choose Image</button>
-                                <button class="save-img">Save Image</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
             <script src="apikey.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
-            <script type = "text/javascript" src="app.js">
+            <script type = "text/javascript" src="{% static 'js/text2image.js' %}">
                 
 
 

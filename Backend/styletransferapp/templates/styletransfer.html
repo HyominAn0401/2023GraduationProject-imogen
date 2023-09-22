@@ -16,9 +16,9 @@
             
             <ul class="menu">
                 <li><a href="./styletransfer.html">StyleTransfer</a></li>
-                <li><a href="./upload_image.html">Text2Imagen</a></li>
-                <li><a href=".html">Sketch2Imagen</a></li>
-                <li><a href=".html">ImageEdit</a></li>
+                <li><a href="./text2img.html">Text2Imagen</a></li>
+                <li><a href="./imageEdit.html">ImageEdit</a></li>
+                <li><a href=".html">Function4</a></li>
                 <!--<li><button class="loginbtn" onclick="showPopup();" style="width:auto;">Login</button></li>-->
             </ul>
         </div>
@@ -132,98 +132,6 @@
                     </div>
 
                 </div>
-
-
-                <!-- <div>
-                    <h2 class="title2">Frame size</h2>
-                    <div class="frame-buttons">
-                        <div class="phoneframe" style="margin-bottom: 30px;">
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="390x844">
-                                <span>iPhone 14</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="393x852">
-                                <span>iPhone 14 Pro</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="428x926">
-                                <span>iPhone 14 Plus</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="428x932">
-                                <span>iPhone 14 Pro Max</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="390x844">
-                                <span>iPhone 13 / 13 Pro</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="375x812">
-                                <span>iPhone 13 mini</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="320x568">
-                                <span>iPhone SE</span>
-                            </label>
-                        </div>
-                        <div class="tabletframe" style="margin-bottom: 30px;">
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="1440x960">
-                                <span>iSurface Pro 8</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="744x1133">
-                                <span>iPad mini 8.3</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="834x1194">
-                                <span>iPad Pro 11"</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="1024x1366">
-                                <span>iPad Pro 12.9"</span>
-                            </label>
-                        </div>
-                        <div class="desktopframe" style="margin-bottom: 30px;">
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="1280x832">
-                                <span>1280 x 832</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="1512x982">
-                                <span>1512 x 982</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="1728x1117">
-                                <span>1728 x 1117</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="1440x1024">
-                                <span>1440 x 1024</span>
-                            </label>
-                        </div>
-                        <div class="watchframe">
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="176x215">
-                                <span>Apple Watch 41mm</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="198x242">
-                                <span>Apple Watch 45mm</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="184x224">
-                                <span>Apple Watch 44mm</span>
-                            </label>
-                            <label class="button2">
-                                <input type="radio" name="frame-size" value="162x197">
-                                <span>Apple Watch 40mm</span>
-                            </label>
-                            
-                        </div>
-                    </div>
-                </div> -->
                 <div>
                     <h2 class="title2" style="margin-top:100px">Email Address</h2>
                     <textarea id="email" class="textarea" name="email" rows=5 placeholder="abc123@gmail.com" onfocus="this.placeholder=''" onblur="this.placeholder='abc123@gmail.com'" ></textarea>
@@ -237,6 +145,7 @@
             <div class="result-image">
                 <h2 class = "title2">Result</h2>
                 <hr class="line1" align='left'>
+                <!-- 로딩창 image src를 gif로 -->
                 
                 <div id="mapcontents">
                     <img src="{{ generated_image_model.generated_image.url }}" id="result-image">
@@ -255,14 +164,6 @@
                             </div>
                         </div>
                     </div>
-
-                    
-                    
-                    <!-- <span id="dragsrc" style="display:block">                       
-                    </span>
-                    <div id="droptarget">
-                    </div> -->
-                    
                 </div>
             </div>
 

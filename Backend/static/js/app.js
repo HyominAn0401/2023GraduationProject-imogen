@@ -502,7 +502,7 @@ function Popup(popupId_val) {
 // 팝업 객체 생성
 var popup = new Popup("popup-1");
 
-// 팝업 토글 예시
+// 팝업 토글
 document.getElementById("toggleButton").addEventListener("click", function() {
     togglePopup(popup.popupId);
 });
