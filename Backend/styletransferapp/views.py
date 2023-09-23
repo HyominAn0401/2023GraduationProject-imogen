@@ -97,3 +97,11 @@ async def upload_image(request):
         return render(request, 'styletransfer.html', {'generated_image_model': generated_image_model})
 
     return render(request, 'styletransfer.html')
+
+#text2imgen
+def text2imagen(request):
+    return render(request, 'text2img.html')
+
+#ImageEdit
+def image_edit(request):
+    return render(request, 'imageEdit.html')

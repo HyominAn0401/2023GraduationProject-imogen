@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" rel="stylesheet">-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" />
-<link rel="stylesheet" type="text/css" href="style.css"/> <!--외부스타일시트 연결-->
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> <!--외부스타일시트 연결-->
     </head>
     <body>
         <nav>
@@ -21,9 +21,9 @@
                 <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1> <!--LOGO squaremaze 글자체 적용시켜야함-->
                 
                 <ul class="menu">
-                    <li><a href="./styletransfer.html">StyleTransfer</a></li>
-                    <li><a href="./text2img.html">Text2Imagen</a></li>
-                    <li><a href="./imageEdit.html">ImageEdit</a></li>
+                    <li><a href="{% url 'stylegen' %}">StyleTransfer</a></li>
+                    <li><a href="{% url 'text2img' %}">Text2Imagen</a></li>
+                    <li><a href="{% url 'imageEdit' %}">ImageEdit</a></li>
                     <li><a href=".html">Function4</a></li>
                 </ul>
             </div>
