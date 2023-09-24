@@ -20,10 +20,10 @@
                 <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1> <!--LOGO squaremaze 글자체 적용시켜야함-->
                 
                 <ul class="menu">
-                    <li><a href="styletransfer.html">StyleTransfer</a></li>
-                    <li><a href="sketch2img.html">Sketch2Image</a></li>
+                    <li><a href="styletransfer.html">StyleGen</a></li>
+                    <li><a href="sketch2img.html">Sketch2Img</a></li>
                     <li><a href="text2img.html">Text2ImaGen</a></li>
-                    <li><a href=".html">Function4</a></li>
+                    <li><a href="imageEditor.html">ImageEdit</a></li>
                 </ul>
             </div>
         </nav>
@@ -63,7 +63,7 @@
             </section>
 
 
-            <section id="aboutme" class="image-section" style="display: block;">
+            <!-- <section id="aboutme" class="image-section" style="display: block;">
                 <div style="margin-bottom: 50px;">
                     <h2 class="comment-head">Frame size</h2>
                     <form>
@@ -118,7 +118,7 @@
                         </div>
                         <div class="desktopframe" style="margin-bottom: 30px;">
                             <label class = "button2">
-                                <input type="radio" name = "frame-size" value="640x416"> <!--1280x832-->
+                                <input type="radio" name = "frame-size" value="1280x832">
                                 <span>1280 x 832</span>
                             </label>
                             <label class = "button2">
@@ -144,7 +144,7 @@
                                 <span>Apple Watch 45mm</span>
                             </label>
                             <label class = "button2">
-                                <input type="radio" name = "frame-size" value="368x448"><!--184x224-->
+                                <input type="radio" name = "frame-size" value="184x224">]
                                 <span>Apple Watch 44mm</span>
                             </label>
                             <label class = "button2">
@@ -154,7 +154,9 @@
                         </div>
                     </div></form>
                 </div>
-                <!--<h2 id="result" class="comment-head" style="display: block;">Result</h2>-->
+
+
+                
     
                 <div class="container-cropper">
                     <div>
@@ -167,14 +169,34 @@
                         <button id="cropButton" class="button-generate" style="margin-bottom: 70px;">Crop the image</button>
                     </label>
                 </div>
-            </section>
+
+            </section>-->
+
+
             <section id="aboutme">
+                <div class="result">
+                    <h2 class = "title2">Result</h2>
+                    <hr class="line1" align='left'>
+                    
+                    <div>
+                        <!-- <img src="{{ generated_image_model.generated_image.url }}" id="result-image"> -->
+                        <img src="img/0.png" id="result-image">
+                    </div>
+                    <div class="row">
+                        <a href="./img/01.png" download>save image</a>
+                        <button class="save-img">Save Image</button>
+                        <button class="share-img">Share Image</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- <section id="aboutme">
                 <div class="container2 disable">
                     <h2>Image Editor</h2>
-                    <div class = "wrapper-imgeditor"> <!--이미 style sheet에 존재-->
+                    <div class = "wrapper-imgeditor">
                         <div class="editor-panel">
                             <div class="filter">
-                                <label class="title3">Filters</label> <!--이미 style sheet에 존재-->
+                                <label class="title3">Filters</label>
                                 <div class="options">
                                     <button id="brightness" class="active">Brightness</button>
                                     <button id="saturation">Saturation</button>
@@ -197,13 +219,13 @@
                             <button class="reset-filter">Reset Filters</button>
                             <div class="row">
                                 <input type="file" class="file-input" accept="image/*" hidden>
-                                <!-- <button class="choose-img">Choose Image</button> -->
+                                <button class="choose-img">Choose Image</button>
                                 <button class="save-img">Save Image</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <script src="apikey.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.min.js"></script>
             <script type = "text/javascript" src="app.js">

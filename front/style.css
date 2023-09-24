@@ -327,7 +327,7 @@ hr.line1{
       padding:0px;
   }
   #comments-count{
-      font: size 25px;
+      font-size: 25px;
       color :#B4C8BB;
   }
   .textarea{
