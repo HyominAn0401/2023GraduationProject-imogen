@@ -3,15 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>ImaGen</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <!--<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" rel="stylesheet">-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" /> -->
 <link rel="stylesheet" type="text/css" href="style.css"/> <!--외부스타일시트 연결-->
     </head>
     <body>
@@ -54,214 +54,78 @@
                     <h2 class="comment-head">Negative Prompt</h2>
                     <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="ex. scary, dirty"></textarea>
                 </div>
-                <script>
+                <!-- <script>
                     function goToImageDesigner() {
                         const imageUrl = document.getElementById('generatedImage').src; // 'generatedImage'는 이미지를 표시하는 img 태그의 ID입니다.
                         window.location.href = `imagedesigner.html?image_url=${encodeURIComponent(imageUrl)}`;
                     }
-                    </script>
+                    </script> -->
                     
                 
                 <div id="submit-icon">
                     <button id="text2imgBtn" class="button-generate" type="submit" onclick="">Generate!</button>
-                    <button onclick="goToImageDesigner()">Go to ImageDesigner</button>
+                    <!-- <button onclick="goToImageDesigner()">Go to ImageDesigner</button> -->
 
                 </div>
                 <div id ="submit"></div>
             </section>
 
-
             <section id="aboutme" class="image-section" style="display: block;">
-                <div style="margin-bottom: 50px;">
-                    <h2 class="comment-head">Frame size</h2>
-                    <form>
-                    <div class="frame-buttons">
-                        <div class="phoneframe" style="margin-bottom: 30px;">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1170x2532">
-                                <span>iPhone 14</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1179x2556">
-                                <span>iPhone 14 Pro</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1284x2778">
-                                <span>iPhone 14 Plus</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="428x932">
-                                <span>iPhone 14 Pro Max</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="390x844">
-                                <span>iPhone 13 / 13 Pro</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="375x812">
-                                <span>iPhone 13 mini</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="320x568">
-                                <span>iPhone SE</span>
-                            </label>
-                        </div>
-                        <div class="tabletframe" style="margin-bottom: 30px;">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1440x960">
-                                <span>iSurface Pro 8</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="744x1133">
-                                <span>iPad mini 8.3</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="834x1194">
-                                <span>iPad Pro 11"</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1024x1366">
-                                <span>iPad Pro 12.9"</span>
-                            </label>
-                        </div>
-                        <div class="desktopframe" style="margin-bottom: 30px;">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="640x416"> <!--1280x832-->
-                                <span>1280 x 832</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1512x982">
-                                <span>1512 x 982</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1728x1117">
-                                <span>1728 x 1117</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="1440x1024">
-                                <span>1440 x 1024</span>
-                            </label>
-                        </div>
-                        <div class="watchframe">
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="176x215">
-                                <span>Apple Watch 41mm</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="198x242">
-                                <span>Apple Watch 45mm</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="368x448"><!--184x224-->
-                                <span>Apple Watch 44mm</span>
-                            </label>
-                            <label class = "button2">
-                                <input type="radio" name = "frame-size" value="162x197">
-                                <span>Apple Watch 40mm</span>
-                            </label>
-                        </div>
-                    </div></form>
-                </div>
-                <!--<h2 id="result" class="comment-head" style="display: block;">Result</h2>-->
-    
-                <div class="container-cropper">
-                    <div>
-                        <img id="generatedImage" src="" alt="생성된 이미지">
-                    </div>
-                    <div>
-                        <canvas id="croppedCanvas"></canvas>
-                    </div>
-                    <label class = "button2">
-                        <button id="cropButton" class="button-generate" style="margin-bottom: 70px;">Crop the image</button>
-                    </label>
-                </div>
-            </section>
-            <section id="aboutme">
-                <div class="container2 disable">
-                    <h2>Image Editor</h2>
-                    <div class = "wrapper-imgeditor"> <!--이미 style sheet에 존재-->
-                        <div class="editor-panel">
-                            <div class="filter">
-                                <label class="title3">Filters</label> <!--이미 style sheet에 존재-->
-                                <div class="options">
-                                    <button id="brightness" class="active">Brightness</button>
-                                    <button id="saturation">Saturation</button>
-                                    <button id="inversion">Inversion</button>
-                                    <button id="grayscale">Grayscale</button>
+                <div class="result-image">
+                    <h2 class = "title2">Result</h2>
+                    <hr class="line1" align='left'>
+                    <!-- 로딩창 image src를 gif로 -->
+                    
+                    <div id="mapcontents">
+                        <img src="" id="result-image">
+                        <a href="" download="image" id="downloadLink" style="display: none;"><button id="downloadButton" class="button">Download Image</button></a>
+                        <button id="toggleButton" class="button" style="display: none;">Share Image</button>
+                        <button id="imageEditButton" class="button" style="display:none;">Edit Image</button>
+
+                        <div id="popups">
+                            <div class="popup" id="popup-1">
+                                <div class="overlay"></div>
+                                <div class="content">
+                                    <div class="close-btn" onclick="togglePopup('popup-1')"></div>
+                                    <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
+                                    <textarea id="email2" class="textarea" name="email2" rows=5 placeholder="abc123@gmail.com"></textarea>
+                                    <button id="submit" class="button" style="float:right">보내기</button>
                                 </div>
-                                <div class="slider">
-                                    <div class="filter-info">
-                                        <p class="name">Brightness</p>
-                                        <p class="value">100%</p>
-                                    </div>
-                                    <input type="range" value="100" min="0" max="200">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="preview-img">
-                            <img src="https://codingnepalweb.com/demos/image-editor-javascript/image-placeholder.svg" alt="preview-img">
-                        </div>
-                        <div class="controls">
-                            <button class="reset-filter">Reset Filters</button>
-                            <div class="row">
-                                <input type="file" class="file-input" accept="image/*" hidden>
-                                <!-- <button class="choose-img">Choose Image</button> -->
-                                <button class="save-img">Save Image</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+<!-- 
+            <section id="aboutme" class="image-section" style="display: block;">
+                <div class="result-image">
+                    <h2 class = "title2">Result</h2>
+                    <hr class="line1" align='left'>
+                    <h2 id="result" class="comment-head" style="display: block;">Result</h2>
+                </div>
+                <div id="image-div"></div>
+                <div id="button-container">
+                    <a href="" download="image" id="downloadLink" style="display: none;"><button id="downloadButton" class="button">Download Image</button></a>
+                        <button id="toggleButton" class="button" style="display: none;">Share Image</button>
+                        <button id="imageEditButton" class="button" style="display:none;">Edit Image</button>
+
+                        <div id="popups">
+                            <div class="popup" id="popup-1">
+                                <div class="overlay"></div>
+                                <div class="content">
+                                    <div class="close-btn" onclick="togglePopup('popup-1')"></div>
+                                    <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
+                                    <textarea id="email2" class="textarea" name="email2" rows=5 placeholder="abc123@gmail.com"></textarea>
+                                    <button id="submit" class="button" style="float:right">보내기</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section> -->
             <script src="apikey.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.min.js"></script>
-            <script type = "text/javascript" src="app3.js">
-                
-
-
-/*
-                function warnEmpty(){
-                    alert("Enter a Input");
-                }
-                function dateToString(date){
-                    //const dateString=date
-                    const dateString=date.toISOString();
-                    const dateToString=dateString.substring(0,10) + " " + dateString.substring(11,19);
-                    return dateToString;
-                }
-
-                function submitComment(){
-                    const newcommentEL = document.getElementById("new-comment");
-                    const newcomment = newcommentEL.value.trim(); //양끝에서 공백을 삭제
-
-                    if(newcomment) {
-                        const tzoffset = new Date().getTimezoneOffset()*60000;
-                        const dateEL = document.createElement('div');//div 요소 만들고 dateEL에 저장
-                        dateEL.classList.add("comment-date");
-                        var a = new Date(Date.now()-tzoffset);
-                        const dateString = dateToString(a);
-                        dateEL.innerText = dateString;
-
-                        const contentEL=document.createElement('div');
-                        contentEL.classList.add('comment-content');
-                        contentEL.innerText=newcomment;
-
-                        const commentEL = document.createElement('div');
-                        commentEL.classList.add('comment-row');
-                        commentEL.appendChild(dateEL);
-                        commentEL.appendChild(contentEL);
-                        
-
-                        document.getElementById('comments').appendChild(commentEL);
-                        newcommentEL.value="";
-
-                        const countEL=document.getElementById("comments-count");
-                        const count = countEL.innerText;
-                        countEL.innerText = parseInt(count) + 1;
-                    }
-                    else warnEmpty();
-                }
-*/
-            </script>
+            <script type = "text/javascript" src="text2imageApp.js"></script>
             
                 <footer>
                     <div id="copyright">
