@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StyleTransfer</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <style>
+        body {
+            background-image: url('path_to_your_background_image.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center; /* 중앙 정렬 */
+        }
+
+        .member {
+            position: relative; 
+            display: inline-block; /* 팀원들을 나란히 배치 */
+            margin: 20px;
+        }
+
+        .member-info {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 상하, 좌우 중앙 정렬 */
+            width: 150px; /* 정사각형 모양을 위한 너비 */
+            height: 150px; /* 정사각형 모양을 위한 높이 */
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 15px; /* 둥근 테두리 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+
+        .member:hover .member-info {
+            display: block;
+        }
+
+        /* 프로젝트 소개 스타일 */
+        .project-description {
+            margin: 50px 0;
+            transition: font-size 0.3s; /* 폰트 크기 변환 애니메이션 */
+        }
+
+        .project-description:hover {
+            font-size: 1.5em; /* 글씨 크기 확대 */
+        }
+        
+        .centered-text {
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="wrapper">
+            <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1>
+            <ul class="menu">
+                <li><a href="styletransfer.html">StyleTransfer</a></li>
+                <li><a href="sketch2img.html">Sketch2img</a></li>
+                <li><a href="text2img.html">Text2img</a></li>
+                <li><a href="imagedesigner.html">Imagedesigner</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="wrapper">            
+        <section id="aboutme" class="centered-text">
+            <h2 class="title">Team <span style="color:#B4C8BB">Emogen</span></h2>
+            <p class="article">
+                Team Emogen은 구성원 3명과 함께 이루어진 프로젝트로,<br> 
+                사용자들이 직접 원하는 사진을 편집, 생성, 텍스트를 사용자 이미지화 하는 기능을 제시합니다.<br>
+                지금 당신의 이미지를 생성하고, 커스터마이징 해보세요!
+            </p>
+        </section>        
+
+            <!-- 프로젝트 소개 섹션 -->
+            <div class="projects">
+                <div class="project">
+                    <img src="path_to_styletransfer_image.jpg" alt="">
+                    <div class="project-description">
+                        <h3>StyleTransfer</h3>
+                        <p>StyleTransfer는 사용자의 기본 이미지(Content)를 다른 스타일 이미지의 화풍(Style)으로 변환하는 놀라운 기능을 제공합니다.<br>
+
+                            사용자가 제공하는 content이미지는 선택한 style이미지의 독특한 화풍과 특징에 따라 재구성됩니다.<br>
+                            
+                            아직 어떤 스타일로 변환할지 결정하지 못했다구요? 다양한 스타일 샘플을 통해 원하는 화풍의 결과를 미리 확인하고 변환해보세요!</p>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="path_to_sketch2img_image.jpg" alt="">
+                    <div class="project-description">
+                        <h3>Sketch2img</h3>
+                        <p>Sketch2image는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br>
+
+                            원하는 배경화면이 어떤 모습인지 말해주세요!<br>
+                            Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.
+                            </p>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="path_to_text2img_image.jpg" alt="">
+                    <div class="project-description">
+                        <h3>Text2img</h3>
+                        <p>Text To Image는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br>
+
+                            원하는 배경화면이 어떤 모습인지 말해주세요!<br>
+                            Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.</p>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="path_to_imagedesigner_image.jpg" alt="">
+                    <div class="project-description">
+                        <h3>Imagedesigner</h3>
+                        <p>Image Designer는 사용자가 이미지를 쉽게 편집하고 디자인할 수 있는 웹 플랫폼입니다.<br>
+
+                            이 웹 페이지는 다양한 이미지 편집 도구와 함께 사용자 친화적인 인터페이스를 제공하여 누구나 손쉽게 이미지를 디자인할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        <!-- 팀원 소개 -->
+        <section id="team-members">
+            <div class="member">
+                <img src="path_to_member1_image.jpg" alt="Member 1">
+                <h3>Member 1 Name</h3>
+                <p>Member 1 Role</p>
+                <p>Member 1 Short Description</p>
+                <div class="member-info">
+                    <p>Email: member1@email.com</p>
+                    <p>SNS: @member1</p>
+                </div>
+            </div>
+            <div class="member">
+                <img src="path_to_member2_image.jpg" alt="Member 2">
+                <h3>Member 2 Name</h3>
+                <p>Member 2 Role</p>
+                <p>Member 2 Short Description</p>
+                <div class="member-info">
+                    <p>Email: member2@email.com</p>
+                    <p>SNS: @member2</p>
+                </div>
+            </div>
+            <div class="member">
+                <img src="path_to_member3_image.jpg" alt="Member 3">
+                <h3>Member 3 Name</h3>
+                <p>Member 3 Role</p>
+                <p>Member 3 Short Description</p>
+                <div class="member-info">
+                    <p>Email: member3@email.com</p>
+                    <p>SNS: @member3</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div id="copyright">
+                <span>All contents Copyright 2023 by ImogenTeam. All rights reserved<br>
+                Contact mail : ran4088@sookmyung.ac.kr</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
