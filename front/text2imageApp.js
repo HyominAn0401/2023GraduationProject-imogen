@@ -5,13 +5,13 @@ function goToScroll(name) {
 
 /*Google Translator*/
 const PAPAGO_API_ENDPOINT = "https://openapi.naver.com/v1/papago/n2mt";
-const CLIENT_ID = "QCj7kGXAcHcexd7vvQHy"; // Removed for security
-const CLIENT_SECRET = "StMNMqi6ak"; // Removed for security
+const CLIENT_ID = config.googleClientID; // Removed for security
+const CLIENT_SECRET = config.googleClientSecret; // Removed for security
 
 // const API_KEY = 'AIzaSyB8J27rzg56JrptEx-pmNy2QPkVVlNZ9Sw'; // Removed for security
 
 async function translateToEnglish(text) {
-    const API_KEY = 'AIzaSyB8J27rzg56JrptEx-pmNy2QPkVVlNZ9Sw'; // 여기에 Google Cloud Platform에서 받은 API 키를 입력하세요.
+    const API_KEY = config.googleTranslateAPI; // 여기에 Google Cloud Platform에서 받은 API 키를 입력하세요.
     const endpoint = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
     const body = {
         q: text,

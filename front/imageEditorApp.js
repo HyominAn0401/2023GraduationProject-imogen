@@ -4,12 +4,13 @@ function goToScroll(name) {
 }
 
 // document.addEventListener("DOMContentLoaded", function(){
+
 /*이미지 가져오기*/
 const urlStr = window.location.href;
 const url = new URL(urlStr)
 const urlParams = url.searchParams;
 const imageUrl = urlParams.get('imageUrl');
-const generatedImage = document.getElementById("generatedImage");
+var generatedImage = document.getElementById("generatedImage");
 
 // console.log(getUrlParameter("imageUrl"))
 // var imageUrl = decodeURIComponent(getUrlParameter("imageUrl"));
@@ -26,6 +27,53 @@ function getUrlParameter(name) {
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
+
+/*이미지 업로드*/
+function openFileInput() {
+    var imageInput = document.getElementById('imageInput');
+    imageInput.click();
+  }
+  document.getElementById('imageInput').addEventListener('change', function() {
+    var imageInput = document.getElementById('imageInput');
+    var previewImage = document.getElementById('generatedImage');
+    var cropperContainer = document.getElementById('cropperContainer');
+  
+    if (imageInput.files && imageInput.files[0]) {
+        generatedImage.src = URL.createObjectURL(imageInput.files[0])
+        cropper.replace(generatedImage.src)
+        goToScroll('button');
+        generatedImage.style.display="block"
+      };
+    });
+console.log(generatedImage.src)
+
+/*framebutton*/
+function showPhoneDiv() {
+    document.getElementById("phoneframe").style.display = "block";
+    document.getElementById("tabletframe").style.display = "none";
+    document.getElementById("desktopframe").style.display = "none";
+    document.getElementById("watchframe").style.display="none"
+  }
+  
+  function showTabletDiv() {
+    document.getElementById("phoneframe").style.display = "none";
+    document.getElementById("tabletframe").style.display = "block";
+    document.getElementById("desktopframe").style.display = "none";
+    document.getElementById("watchframe").style.display="none"
+  }
+
+  function showDesktopDiv() {
+    document.getElementById("phoneframe").style.display = "none";
+    document.getElementById("tabletframe").style.display = "none";
+    document.getElementById("desktopframe").style.display = "block";
+    document.getElementById("watchframe").style.display="none"
+  }
+  function showWatchDiv() {
+    document.getElementById("phoneframe").style.display = "none";
+    document.getElementById("tabletframe").style.display = "none";
+    document.getElementById("desktopframe").style.display = "none";
+    document.getElementById("watchframe").style.display="block"
+  }
 
 
 /*cropper*/
@@ -79,6 +127,8 @@ function getUrlParameter(name) {
             //크롭된 이미지를 화면에 표시(예: 이미지 요소에 설정)
             const previewImg = document.querySelector(".preview-img img");  //이미지 요소 선택
             previewImg.src = croppedImage.toDataURL(); //크롭된 이미지를 Data URL로 변환해 src에 설정
+            goToScroll("button-generate")
+            
         }
     });
 
@@ -98,7 +148,7 @@ filterOptions = document.querySelectorAll(".filter button"),
 filterName = document.querySelector(".filter-info .name"),
 filterValue = document.querySelector(".filter-info .value"),
 filterSlider = document.querySelector(".slider input"),
-//rotateOptions = document.querySelectorAll(".rotate button"),
+rotateOptions = document.querySelectorAll(".rotate button"),
 //previewImg = document.querySelector(".preview-img img"),
 resetFilterBtn = document.querySelector(".reset-filter"),
 chooseImgBtn = document.querySelector(".choose-img"),
@@ -162,7 +212,7 @@ const updateFilter = () => {
     }
     applyFilter();
 }
-/*rotateOptions.forEach(option => {
+rotateOptions.forEach(option => {
     option.addEventListener("click", () => {
         if(option.id === "left") {
             rotate -= 90;
@@ -175,7 +225,7 @@ const updateFilter = () => {
         }
         applyFilter();
     });
-});*/
+});
 const resetFilter = () => {
     brightness = "100"; saturation = "100"; inversion = "0"; grayscale = "0";
     //rotate = 0; flipHorizontal = 1; flipVertical = 1;
@@ -207,3 +257,20 @@ saveImgBtn.addEventListener("click", saveImage);
 //fileInput.addEventListener("change", loadImage);
 //chooseImgBtn.addEventListener("click", () => fileInput.click());
 
+/* 이메일 보내기 버튼 */
+function togglePopup(popupId) {
+    var popup = document.getElementById(popupId);
+    popup.classList.toggle("active");
+}
+
+function Popup(popupId_val) {
+    this.popupId = popupId_val;
+}
+
+// 팝업 객체 생성
+var popup = new Popup("popup-1");
+
+// 팝업 토글 예시
+document.getElementById("toggleButton").addEventListener("click", function() {
+    togglePopup(popup.popupId);
+});
