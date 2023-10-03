@@ -249,6 +249,26 @@ hr.line1{
     background-color:#262A2D;
     color:#ffffff;
 }
+.button3{
+  display:inline-block;
+    padding: 5px 10px;
+    background-color:#E7E3E3;
+    color:#ffffff;
+    box-shadow: none;
+    font-family: "Noto Sans KR";font-size:16px;font-weight: bold;
+    border-radius: 20px; border-color:#E7E3E3;border-style: solid;
+    margin-bottom: 20px;
+}
+.button3:focus{
+  outline:0;
+}
+.button3:hover{
+background-color:#262A2D;
+cursor:pointer;
+box-shadow: none;
+}
+
+
 
 
 /*드래그앤 드랍, 파일업로드*/
@@ -381,44 +401,50 @@ hr.line1{
   width: 100px
 }*/
 
+
 /*image editor*/
+.imageEdit-section{
+  display: flex;
+  padding: 10px;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+}
 .container2{
-  width: 850px;
-  height: 1000px;
+  display:flex;
   padding: 30px 35px 35px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
-.container2.disable .editor-panel,
-.container2.disable .controls .reset-filter,
+
+
+/* .container2.disable .editor-panel,
 .container2.disable .controls .save-img{
   opacity: 0.5;
   pointer-events: none;
-}
-.container2 h2{
-  margin-top: -8px;
-  font-size: 22px;
-  font-weight: 500;
-}
+}*/
 .container2 .wrapper-imgeditor{
-  /*display: flex;*/
-  position:relative;
-  float: left;
+  display: flex;
   margin: 20px 0;
   min-height: 335px;
+  flex-wrap: wrap;
 }
+
 .wrapper-imgeditor .editor-panel{
   padding: 15px 20px;
-  width: 280px;
+  width: 200px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 .editor-panel .title3{
   display: block;
   font-size: 16px;
   margin-bottom: 12px;
 }
+
 .editor-panel .options, .controls{
   display: flex;
   flex-wrap: wrap;
@@ -459,16 +485,18 @@ hr.line1{
   height: 5px;
   accent-color: #B4C8BB;
 }
-
+.rotate .options button:nth-child(3),
+.rotate .options button:nth-child(4){
+  font-size: 18px;
+}
 .rotate .options button:active{
   color: #fff;
-  background: #B4C8BB;
   border-color: #B4C8BB;
+  background: #B4C8BB;
 }
 .wrapper-imgeditor .preview-img{
-  /*flex-grow: 1;
-  
-  display: flex;*/
+  flex-grow: 1;
+  display: flex;
   overflow: hidden;
   margin-left: 20px;
   border-radius: 5px;
@@ -476,11 +504,11 @@ hr.line1{
   justify-content: center;
 }
 .preview-img img{
-  max-width: 490px;
+  max-width: 400px;
   max-height: 335px;
   width: 100%;
   height: 100%;
-  /*object-fit: contain;*/
+  object-fit: scale-down;
 }
 .controls button{
   padding: 11px 20px;
@@ -511,10 +539,10 @@ hr.line1{
   border: 1px solid #B4C8BB;
 }
 @media screen and (max-width: 760px) {
-  .container{
+  .container2{
     padding: 25px;
   }
-  .container .wrapper-imgeditor{
+  .container2 .wrapper-imgeditor{
     flex-wrap: wrap-reverse;
   }
   .wrapper-imgeditor .editor-panel{

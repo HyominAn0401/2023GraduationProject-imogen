@@ -12,6 +12,7 @@ import torchvision.models as models
 import torch.optim as optim
 from django.conf import settings
 
+
 # 이미지 모델 저장 비동기 함수
 async def save_user_image(content_image, style_image, content_selected_image_path, style_selected_image_path):
     user_image = UserImage(content_image=content_image, style_image=style_image, content_selected_image=content_selected_image_path, style_selected_image=style_selected_image_path)
@@ -105,3 +106,7 @@ def text2imagen(request):
 #ImageEdit
 def image_edit(request):
     return render(request, 'imageEdit.html')
+
+#index
+def index(request):
+    return render(request, 'index.html')

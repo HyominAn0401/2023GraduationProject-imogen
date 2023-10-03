@@ -10,4 +10,5 @@ urlpatterns = [
     path('stylegen/', views.upload_image, name='stylegen'),
     path('text2img/', views.text2imagen, name='text2img'),
     path('imageEdit/', views.image_edit, name='imageEdit'),
+    path('index/', views.index, name="index")
 ]

@@ -8,26 +8,16 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
           </style>
-        <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-        <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" rel="stylesheet">-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.css" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> <!--외부스타일시트 연결-->
     </head>
     <body>
         <nav>
             <div class="wrapper">
-                <h1 id="logo">Imo<span style="color:#B4C8BB">gen</span></h1> <!--LOGO squaremaze 글자체 적용시켜야함-->
-                
+                <h1 id="logo"><a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Imo<span style="color:#B4C8BB">gen</span></a></h1>
                 <ul class="menu">
                     <li><a href="{% url 'stylegen' %}">StyleTransfer</a></li>
                     <li><a href="{% url 'text2img' %}">Text2Imagen</a></li>
                     <li><a href="{% url 'imageEdit' %}">ImageEdit</a></li>
-                    <li><a href=".html">Function4</a></li>
                 </ul>
             </div>
         </nav>
@@ -52,11 +42,11 @@
             <section id="aboutme" class="input-container">
                 <div>
                     <h2 class="comment-head">Prompt</h2>
-                    <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="ex. A cute cat in a red house"></textarea>
+                    <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="예: 빨간 집에 사는 귀여운 고양이"></textarea>
                 </div>
                 <div>
                     <h2 class="comment-head">Negative Prompt</h2>
-                    <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="ex. scary, dirty"></textarea>
+                    <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="예: 더러운, 무서운"></textarea>
                 </div>
                 
                 
@@ -68,16 +58,22 @@
 
 
 
-            <section id="aboutme" class="image-section" style="display: block;">
-                <div style="margin-bottom: 50px;">
-                    <h2 id="result" class="comment-head" style="display: block;">Result</h2>
-                </div>
-                <div id="image-div"></div>
-                <div id="botton-container">
-                    <a href="" download="image" id="downloadLink" style="display: none;"><button id="downloadButton" class="button">Download Image</button></a>
-                        <button id="toggleButton" class="button" style="display: none;">Share Image</button>
-                        <button id="imageEditButton" class="button" style="display:none;">Edit Image</button>
-
+            <section id="aboutme" class="image-section">
+                <div class="result-image" id="result-section" style="display: none;">
+                    <h2 class = "title2">Result</h2>
+                    <!-- 로딩창 image src를 gif로 -->
+                    
+                    <div id="mapcontents">
+                        <img src="" id="result-image" style="width: 100%;">
+                        <div id="buttons" style="display:flex; width: 100%; justify-content: space-between; margin-top: 20px;">
+                            <div id="row">
+                                <a href="" download="image" id="downloadLink"><button id="downloadButton" class="button">Download Image</button></a>
+                                <button id="toggleButton" class="button">Share Image</button>
+                            </div>
+                            <div></div>
+                                <button id="imageEditButton" class="button3">Edit Image</button>
+                            </div>
+                        </div>
                         <div id="popups">
                             <div class="popup" id="popup-1">
                                 <div class="overlay"></div>
@@ -89,9 +85,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </section>
-            <script src="apikey.js"></script>
+            <script src="{% static 'js/apikey.js' %}"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
             <script type = "text/javascript" src="{% static 'js/text2image.js' %}">
                 

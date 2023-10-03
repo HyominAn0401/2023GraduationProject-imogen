@@ -3,14 +3,52 @@ function goToScroll(name) {
     window.scrollTo({top: location, behavior: 'smooth'});
 }
 
+/*Google Translator*/
+const PAPAGO_API_ENDPOINT = "https://openapi.naver.com/v1/papago/n2mt";
+const CLIENT_ID = config.googleClientID; // Removed for security
+const CLIENT_SECRET = config.googleClientSecret; // Removed for security
+
+// const API_KEY = 'AIzaSyB8J27rzg56JrptEx-pmNy2QPkVVlNZ9Sw'; // Removed for security
+
+async function translateToEnglish(text) {
+    const API_KEY = config.googleTranslateAPI; // 여기에 Google Cloud Platform에서 받은 API 키를 입력하세요.
+    const endpoint = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    const body = {
+        q: text,
+        source: 'ko',
+        target: 'en'
+    };
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+        return data.data.translations[0].translatedText;
+    } catch (error) {
+        console.error("Error during translation:", error);
+        return null; // 또는 적절한 오류 메시지나 기본값을 반환할 수 있습니다.
+    }
+}
+
+
 /*Karlo API*/
-const REST_API_KEY = get_secret("apiKey")
+const REST_API_KEY = config.apiKey; // Removed for security
 const submitIcon = document.querySelector(".button-generate")
-const inputElement = document.querySelector("#prompt")
-const imageSection = document.querySelector('#image-div')
-const NinputElement = document.querySelector('#negative-prompt')
+// const imageSection = document.querySelector('#image-div')
+var generatedImageUrl
 
 const getImage = async () => {
+    const promptText = document.querySelector("#prompt").value;
+    const negativePromptText = document.querySelector('#negative-prompt').value;
+    const translatedPrompt = await translateToEnglish(promptText);
+    const translatedNegativePrompt = await translateToEnglish(negativePromptText);
+    console.log(translatedPrompt);
+
     const options = {
         method: "POST",
         headers:{
@@ -18,13 +56,12 @@ const getImage = async () => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "prompt": inputElement.value,
-            "negative_prompt": NinputElement.value,
+            "prompt": translatedPrompt,
+            "negative_prompt": translatedNegativePrompt,
             "width": 512,
-            //"upascale": true,
-            //"scale": 2,
-            // 객체가 센터에 존재하게객
-            "samples": 1
+            "samples": 1,
+            "upscale": true,
+            "scale": 2
         })
     }
     try{
@@ -35,12 +72,18 @@ const getImage = async () => {
         data?.images.forEach(imageObject => {
             console.log(imageObject.image)
             console.log(typeof imageObject.image)
-            const imageContainer = document.createElement('div')
-            imageContainer.classList.add('image-container')
-            const imageElement = document.createElement('img')
-            imageElement.setAttribute('src', imageObject.image)
-            imageContainer.append(imageElement)
-            imageSection.append(imageContainer)
+            // const imageContainer = document.createElement('div')
+            // imageContainer.classList.add('image-container')
+            // const imageElement = document.createElement('img')
+            // imageElement.setAttribute('src', imageObject.image)
+            generatedImageUrl = imageObject.image
+            console.log(generatedImageUrl)
+            document.getElementById("result-image").setAttribute('src', imageObject.image)
+            document.getElementById("downloadLink").setAttribute('href',imageObject.image)
+            console.log("downloadLink")
+            console.log(document.getElementById("downloadLink").src)
+            // imageContainer.append(imageElement)
+            // imageSection.append(imageContainer)
             })
     } catch(error){
         console.error(error)
@@ -52,11 +95,15 @@ submitIcon.addEventListener('click', getImage)
 
 //generate image 생성시
 function imageLoaded(){
-    document.getElementById("downloadLink").style.display="block";
-    document.getElementById("toggleButton").style.display="block";
+    // document.getElementById("downloadLink").style.display="block";
+    document.getElementById("result-section").style.display="block";
+    // document.getElementById("imageEditButton").style.display="block";
 }
 var resultImage = document.getElementById("result-image")
-resultImage.onload = imageLoaded;
+if (resultImage !== null){
+    resultImage.onload = imageLoaded;
+}
+
 
 
 
@@ -76,4 +123,14 @@ var popup = new Popup("popup-1");
 // 팝업 토글 예시
 document.getElementById("toggleButton").addEventListener("click", function() {
     togglePopup(popup.popupId);
+});
+
+
+/*Edit Image 버튼 - ImageEditor 창으로 보내기*/
+
+document.getElementById("imageEditButton").addEventListener("click", function() {
+    // 이미지 URL을 가져와서 imageEditor.html 페이지로 전달
+    var imageUrl = generatedImageUrl; // 이미지 URL을 여기에 적용
+    // window.location.href = "imageEditor.html?imageUrl=" + encodeURIComponent(imageUrl);
+    window.location.href ="http://127.0.0.1:8000/styletransfer/imageEdit?image_url=" + encodeURIComponent(imageUrl);
 });

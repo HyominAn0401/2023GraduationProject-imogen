@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StyleTransfer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;600&display=swap');
+      </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> <!--외부스타일시트 연결-->
+    <style>
+        body {
+            background-image: url('img/paint.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center; /* 중앙 정렬 */
+        }
+
+        .member {
+            position: relative; 
+            display: inline-block; 
+            margin: 20px;
+        }
+
+        .member h3 {
+            font-size: 20px; /* 이름의 폰트 크기 조절 */
+            color: #4A90E2; /* 이름의 색상 변경 */
+        }
+
+        .member p {
+            font-size: 16px; /* 역할의 폰트 크기 조절 */
+            color: #7F8C8D; /* 역할의 색상 변경 */
+        }
+
+        .member img {
+            width: 150px; /* 이미지의 너비 조절 */
+            height: 150px; /* 이미지의 높이 조절 */
+            border-radius: 50%; /* 이미지를 원형으로 만들기 */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 이미지에 그림자 효과 추가 */
+        }
+
+        .member:hover img {
+            transform: scale(1.05); /* 이미지 호버 효과로 약간 확대 */
+            transition: transform 0.3s ease-in-out; /* 확대 효과의 속도 조절 */
+        }
+
+        .member-info {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 150px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .member:hover .member-info {
+            display: block;
+        }
+
+
+
+
+
+
+        
+
+        /* 프로젝트 소개 스타일 */
+
+        .project1, .project2, .project3 {
+            margin-bottom: 60px; /* 아래쪽 마진으로 각 프로젝트 섹션 사이의 간격을 생성 */
+        }
+
+
+        .project1 img {
+            width: 500px;  /* 또는 원하는 폭 값 */
+            height: 420px;  /* 또는 원하는 높이 값 */
+            float: left;
+            object-fit: cover;  /* 이미지의 비율을 유지하면서, 지정한 width와 height에 맞게 이미지를 조절합니다. */
+        }
+
+        .project2 img {
+            width: 500px;  /* 또는 원하는 폭 값 */
+            height: 450px;  /* 또는 원하는 높이 값 */
+            float: left;
+            object-fit: cover;  /* 이미지의 비율을 유지하면서, 지정한 width와 height에 맞게 이미지를 조절합니다. */
+        }
+
+        .project3 img {
+            width: 500px;  /* 또는 원하는 폭 값 */
+            height: 450px;  /* 또는 원하는 높이 값 */
+            float: left;
+            object-fit: cover;  /* 이미지의 비율을 유지하면서, 지정한 width와 height에 맞게 이미지를 조절합니다. */
+        }
+
+
+
+/* 
+        #text2img img, #imagedesigner img {
+            float: right;
+        } */
+
+
+
+        .project-description {
+            margin: 50px 0;
+            transition: font-size 0.3; /* 폰트 크기 변환 애니메이션 */
+        }
+
+        /* .project-description:hover {
+            font-size: 1.2em; /* 글씨 크기 확대 
+        } */
+        
+        .centered-text {
+            text-align: center;
+        }
+
+        .button{
+            /*width:120px;
+            height:35px;*/
+            padding: 5px 10px;
+            background-color:#B4C8BB;
+            color:#ffffff;
+            box-shadow: none;
+            font-family: "Noto Sans KR";font-size:16px;font-weight: bold;
+            border-radius: 20px; border-color:#B4C8BB;border-style: solid;
+            margin-bottom: 5px;
+        }
+        .button:focus{
+            outline:0;
+        }
+        .button:hover{
+        background-color:#262A2D;
+        cursor:pointer;
+        box-shadow: none;
+        }
+
+        /* 각 링크로 가는 버튼 */
+        .wide-button {
+        padding: 10px 20px;
+        background-color: #B4C8BB;
+        color: #ffffff;
+        box-shadow: none;
+        font-family: "Noto Sans KR";
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 20px;
+        border-color: #B4C8BB;
+        border-style: solid;
+        margin-top: 20px;  /* Add some margin on top */
+        }
+        .wide-button:focus {
+            outline: 0;
+        }
+        .wide-button:hover {
+            background-color: #262A2D;
+            cursor: pointer;
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="wrapper">
+            <h1 id="logo"><a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Imo<span style="color:#B4C8BB">gen</span></a></h1>
+            <ul class="menu">
+                <li><a href="{% url 'stylegen' %}">StyleTransfer</a></li>
+                <li><a href="{% url 'text2img' %}">Text2Imagen</a></li>
+                <li><a href="{% url 'imageEdit' %}">ImageEdit</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="wrapper">            
+        <section id="aboutme" class="centered-text" style = "margin-bottom: 300px;">
+            <h2 class="title">Team <span style="color:#B4C8BB">Imogen</span></h2>
+            <p class="article" style="text-align: center">
+                Team Imogen은 구성원 3명과 함께 이루어진 프로젝트로,<br> 
+                사용자들이 직접 원하는 사진을 편집, 생성, 텍스트를 사용자 이미지화 하는 기능을 제시합니다.<br>
+                지금 당신의 이미지를 생성하고, 커스터마이징 해보세요!
+            </p>
+            <div style="text-align: center;">
+                
+                <button class="button" type="button" onclick= "goToScroll('button')">Browsing Now</button>
+                <p style="margin-top: 300px; font-size: 36px;"><strong>"평범함에서 특별함으로,<br>당신의 이미지를 커스터마이즈하고 사용하세요"</strong></p>
+                <p>당신의 맞춤 사진을 생성형 ai 모델을 통해 자유롭게 만들어보고, 편집해보세요.</p>
+            </div>
+        </section>        
+
+            <!-- 프로젝트 소개 섹션 -->
+             <div class="projects" >
+                <div class="project1" style="display: flex; ">
+                    <img src="img/bear.png" alt="">
+                    <div class="project-description" style="margin-left: 50px; padding-top: 30px;">
+                        <h3>StyleTransfer</h3>
+                        <p>StyleTransfer는 사용자의 기본 이미지(Content)를 다른 스타일 이미지의 화풍(Style)으로 변환하는 놀라운 기능을 제공합니다.<br>
+                            아직 어떤 스타일로 변환할지 결정하지 못했다구요? 다양한 스타일 샘플을 통해 원하는 화풍의 결과를 미리 확인하고 변환해보세요!</p>
+                        <button class="wide-button" type="button" onclick="window.location.href='styletransfer.html'">Go to StyleTransfer!</button>
+                    </div>
+                </div>
+                <div class="project2" style="display: flex;">
+                    <div class="project-description" style="margin-left: 50px; padding-top: 30px;">
+                        <h3>Text2img</h3>
+                        <p>Text To Image는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br>
+
+                            원하는 배경화면이 어떤 모습인지 말해주세요!<br>
+                            Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.</p>
+                        <button class="wide-button" type="button" onclick="window.location.href='text2img.html'">Go to Text To Image!</button>
+                    </div>
+                    <img src="img/t2.png" alt="" style="margin-left: 50px;">
+                    
+                </div>
+                <div class="project3" style="display: flex;">
+                    <img src="img/imgd.png" alt="">
+                    <div class="project-description" style="margin-left: 50px; padding-top: 30px;">
+                        <h3>Imagedesigner</h3>
+                        <p>Image Designer는 사용자가 이미지를 쉽게 편집하고 <br>디자인할 수 있는 웹 플랫폼입니다.<br>
+
+                            이 웹 페이지는 다양한 이미지 편집 도구와 함께 사용자 친화적인 <br>인터페이스를 제공하여 누구나 손쉽게 이미지를 디자인할 수 있습니다.</p>
+                        <button class="wide-button" type="button" onclick="window.location.href='imagedesigner.html'">Go to Image Designer!</button>
+                    </div>
+                </div>
+            </div>
+        <!-- 팀원 소개 -->
+        <section id="team-members" style="padding-top: 400px;">
+            <div class="member">
+                <img src="img/cr.gif" alt="Member 1">
+                <h3>유채란</h3>
+                
+                <p>Frontend 개발</p>
+                <div class="member-info">
+                    <p>Email: ran4088@sookmyung.ac.kr</p>
+                    <p>KakaoTalk ID: yoo_lana</p>
+                </div>
+            </div>
+            <div class="member">
+                <img src="img/hm.jpg" alt="Member 2">
+                <h3>안효민</h3>
+                
+                <p>Backend 개발</p>
+                <div class="member-info">
+                    <p>Email: chji365@sookmyung.ac.kr</p>
+                    <p>SNS: @member2</p>
+                </div>
+            </div>
+            <div class="member">
+                <img src="img/jy.jpg" alt="Member 3">
+                <h3>류지연</h3>
+                
+                <p>Frontend 개발</p>
+                <div class="member-info">
+                    <p>Email: 2011212@sookmyung.ac.kr</p>
+                    <p>KakaoTalk ID: rjy00100</p>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div id="copyright">
+                <span>All contents Copyright 2023 by ImogenTeam. All rights reserved<br>
+                Contact mail : ran4088@sookmyung.ac.kr</span>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function goToScroll(name) {
+            var location = document.querySelector("." + name).offsetTop;
+            window.scrollTo({top: location, behavior: 'smooth'});
+        }
+    </script>
+
+</body>
+</html>
