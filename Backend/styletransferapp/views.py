@@ -11,6 +11,31 @@ from torchvision.utils import save_image
 import torchvision.models as models
 import torch.optim as optim
 from django.conf import settings
+from django.http import JsonResponse
+from django.http import HttpResponse
+
+# 결과 이미지 보내는 함수
+def emailResultImage(request):
+    print(settings.BASE_DIR)
+    a = request.POST.get('generatedImage')
+    print(a)
+    a = a[1:]
+    generated_image_path1 = os.path.join(settings.BASE_DIR, a)
+    print(generated_image_path1)
+    email_address= request.POST.get('email2')
+    print(email_address)
+    email = EmailMessage(
+        'StyleTransfer 완료',
+        '첨부된 이미지를 확인해주세요.',
+        settings.EMAIL_HOST_USER,
+        [email_address],
+    )
+    print("Succeed email2")
+    email.attach_file(generated_image_path1)
+    print("Suceed attaching the image")
+    email.send()
+    return HttpResponse("이메일 전송 완료")
+
 
 
 # 이미지 모델 저장 비동기 함수

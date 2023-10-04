@@ -10,5 +10,8 @@ urlpatterns = [
     path('stylegen/', views.upload_image, name='stylegen'),
     path('text2img/', views.text2imagen, name='text2img'),
     path('imageEdit/', views.image_edit, name='imageEdit'),
-    path('index/', views.index, name="index")
+    path('index/', views.index, name="index"),
+
+    path('emailResultImage/', views.emailResultImage, name='emailResultImage'),
+    # 다른 URL 패턴들을 여기에 추가할 수 있습니다.
 ]

@@ -1,18 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>StyleTransfer</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;600&display=swap');
-      </style>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> <!--외부스타일시트 연결-->
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" /> <!--외부스타일시트 연결-->
 </head>
+
 <body>
     <nav>
         <div class="wrapper">
-            <h1 id="logo"><a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Imo<span style="color:#B4C8BB">gen</span></a></h1>
+            <h1 id="logo"><a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Imo<span
+                        style="color:#B4C8BB">gen</span></a></h1>
             <ul class="menu">
                 <li><a href="{% url 'stylegen' %}">StyleTransfer</a></li>
                 <li><a href="{% url 'text2img' %}">Text2Imagen</a></li>
@@ -20,76 +23,78 @@
             </ul>
         </div>
     </nav>
-    <div class="wrapper">            
+    <div class="wrapper">
         <section id="aboutme">
             <div>
-            <!--<img id = "imoji" src="img/imoji.gif" alt="imoji of myself">-->
-            <h2 class = "title">Style<span style="color:#B4C8BB">Transfer</span></h2>
-            
+                <!--<img id = "imoji" src="img/imoji.gif" alt="imoji of myself">-->
+                <h2 class="title">Style<span style="color:#B4C8BB">Transfer</span></h2>
+
                 <!--<hr class="line1" align='left'>-->
-            <p class="article">
-                StyleTransfer는 사용자의 기본 이미지(Content)를 다른 스타일 이미지의 화풍(Style)으로 변환하는 놀라운 기능을 제공합니다. <br><br>
+                <p class="article">
+                    StyleTransfer는 사용자의 기본 이미지(Content)를 다른 스타일 이미지의 화풍(Style)으로 변환하는 놀라운 기능을 제공합니다. <br><br>
 
-                사용자가 제공하는 content이미지는 선택한 style이미지의 독특한 화풍과 특징에 따라 재구성됩니다. 
-                단순히 원하는 content 이미지와 스타일을 반영할 이미지를 업로드하면, StyleTransfer가 두 이미지를 결합하여 새롭게 태어난 예술 작품을 제공합니다.<br><br>
+                    사용자가 제공하는 content이미지는 선택한 style이미지의 독특한 화풍과 특징에 따라 재구성됩니다.
+                    단순히 원하는 content 이미지와 스타일을 반영할 이미지를 업로드하면, StyleTransfer가 두 이미지를 결합하여 새롭게 태어난 예술 작품을 제공합니다.<br><br>
 
-                아직 어떤 스타일로 변환할지 결정하지 못했다구요? 다양한 스타일 샘플을 통해 원하는 화풍의 결과를 미리 확인하고 변환해보세요!<br><br>
+                    아직 어떤 스타일로 변환할지 결정하지 못했다구요? 다양한 스타일 샘플을 통해 원하는 화풍의 결과를 미리 확인하고 변환해보세요!<br><br>
 
 
 
-            </p>
+                </p>
                 <div style="text-align: center;">
-                    <button class="button" type="button" onclick= "goToScroll('button')">Get Started</button>
+                    <button class="button" type="button" onclick="goToScroll('button')">Get Started</button>
                 </div>
             </div>
 
             <form id=radioForm method="POST" action="{% url 'stylegen' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class = "content">
+                <div class="content">
                     <div>
-                        <h2 class = "title2" >Choose Content Image</h2>
+                        <h2 class="title2">Choose Content Image</h2>
                     </div>
-                        
-                        <div class="contents">
-                            <div class="upload-box">
-                                <div id="drop-file" class="drag-file">
-                                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
-                                    <p class="message">Drag files to upload</p>
-                                    <img src="" alt="미리보기 이미지" class="preview">
-                                </div>
-                                <label class="file-label" for="chooseFile">Choose File</label>
-                                <input type="file" class="file" id="chooseFile" name="content_image" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg">
-                            </div>
-                        
-                            
-                            <div class="container">
-                                <div class="cards">
-                                    <label class="card">
-                                        <input type="radio" name="image-card" value="c_sample_01.jpg">
-                                        <img class="thumnail" src="{% static 'img/thum_c_01.jpeg' %}" alt="" />
-                                    </label>
-                                    <label class="card">
-                                        <input type="radio" name="image-card" value="c_sample_02.jpg">
-                                        <img class="thumnail" src="{% static 'img/thum_c_02.jpeg' %}" alt="" />
-                                    </label>
-                                    
-                                    <label class="card">
-                                        <input type="radio" name="image-card" value="c_sample_03.jpeg">
-                                        <img class="thumnail" src="{% static 'img/thum_c_03.jpeg' %}" alt="" />
-                                    </label>
 
-                                    <label class="card">
-                                        <input type="radio" name="image-card" value="c_sample_04.jpg">
-                                        <img class="thumnail" src="{% static 'img/thum_c_04.jpeg' %}" alt="" />
-                                    </label>
-                                    <input type="hidden" name="content_selected_image" id="content_selected_image" value="">
-                                </div>
+                    <div class="contents">
+                        <div class="upload-box">
+                            <div id="drop-file" class="drag-file">
+                                <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘"
+                                    class="image" id="dropboxImage1">
+                                <p class="message">Drag files to upload</p>
+                                <img src="" alt="미리보기 이미지" class="preview">
+                            </div>
+                            <label class="file-label" for="chooseFile">Choose File</label>
+                            <input type="file" class="file" id="chooseFile" name="content_image"
+                                onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg">
+                        </div>
+
+
+                        <div class="container">
+                            <div class="cards">
+                                <label class="card">
+                                    <input type="radio" name="image-card" value="c_sample_01.jpg">
+                                    <img class="thumnail" src="{% static 'img/thum_c_01.jpeg' %}" alt="" />
+                                </label>
+                                <label class="card">
+                                    <input type="radio" name="image-card" value="c_sample_02.jpg">
+                                    <img class="thumnail" src="{% static 'img/thum_c_02.jpeg' %}" alt="" />
+                                </label>
+
+                                <label class="card">
+                                    <input type="radio" name="image-card" value="c_sample_03.jpeg">
+                                    <img class="thumnail" src="{% static 'img/thum_c_03.jpeg' %}" alt="" />
+                                </label>
+
+                                <label class="card">
+                                    <input type="radio" name="image-card" value="c_sample_04.jpg">
+                                    <img class="thumnail" src="{% static 'img/thum_c_04.jpeg' %}" alt="" />
+                                </label>
+                                <input type="hidden" name="content_selected_image" id="content_selected_image" value="">
                             </div>
                         </div>
-                    
+                    </div>
+
                 </div>
-                
-                
+
+
                 <div class="content">
                     <div>
                         <h2 class="title2">Choose Style Image</h2>
@@ -98,17 +103,20 @@
 
                         <div class="upload-box">
                             <div id="drop-file2" class="drag-file">
-                                <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+                                <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘"
+                                    class="image" id="dropboxImage2">
                                 <p class="message">Drag files to upload</p>
                                 <img src="" alt="미리보기 이미지" class="preview">
                             </div>
                             <label class="file-label" for="chooseFile2">Choose File</label>
-                            <input class="file" id="chooseFile2" type="file" name="style_image" onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg">
+                            <input class="file" id="chooseFile2" type="file" name="style_image"
+                                onchange="dropFile2.handleFiles(this.files)" accept="image/png, image/jpeg">
                         </div>
                         <div class="container">
                             <div class="cards">
                                 <label class="card">
-                                    <input type="radio" name="image-card2" value="s_sample_01.jpeg">
+                                    <input type="radio" name="image-card2" value="s_sample_01.jpeg"
+                                        id="{% static 'img/thum_s_01.jpeg' %}">
                                     <img class="thumnail" src="{% static 'img/thum_s_01.jpeg' %}" alt="" />
                                 </label>
                                 <label class="card">
@@ -131,7 +139,8 @@
                 </div>
                 <div>
                     <h2 class="title2" style="margin-top:100px">Email Address</h2>
-                    <textarea id="email" class="textarea" name="email" rows=5 placeholder="abc123@gmail.com" onfocus="this.placeholder=''" onblur="this.placeholder='abc123@gmail.com'" ></textarea>
+                    <textarea id="email" class="textarea" name="email" rows=5 placeholder="abc123@gmail.com"
+                        onfocus="this.placeholder=''" onblur="this.placeholder='abc123@gmail.com'"></textarea>
                 </div>
                 <div class="generate" style="text-align: center; margin-top: 100px;">
                     <input type="submit" class="button-generate" value="Generate!" onclick="">
@@ -140,18 +149,23 @@
             </form>
 
             <div class="result-image">
-                <h2 class = "title2">Result</h2>
+                <h2 class="title2">Result</h2>
                 <!-- 로딩창 image src를 gif로 -->
-                
+
                 <div id="mapcontents">
                     <img src="{{ generated_image_model.generated_image.url }}" id="result-image">
-                    
-                    <div id="buttons" style="display:flex; width: 100%; justify-content: space-between; margin-top: 20px;">
+                    <!-- <div style="padding:100px">
+                        <img src="{% static 'img/1487 (1).gif' %}" style="display : block; margin : auto;">
+                    </div> -->
+
+                    <div id="buttons"
+                        style="display:flex; width: 100%; justify-content: space-between; margin-top: 20px;">
                         <div id="row">
-                            <a href="{{ generated_image_model.generated_image.url }}" download="image" id="downloadLink" style="display: none;"><button id="downloadButton" class="button">Download Image</button></a>
+                            <a href="{{ generated_image_model.generated_image.url }}" download="image"
+                                id="downloadLink"><button id="downloadButton" class="button">Download Image</button></a>
                             <button id="toggleButton" class="button">Share Image</button>
                         </div>
-                        <div></div>
+                        <div>
                             <button id="imageEditButton" class="button3">Edit Image</button>
                         </div>
                     </div>
@@ -162,26 +176,165 @@
                             <div class="content">
                                 <div class="close-btn" onclick="togglePopup('popup-1')"></div>
                                 <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
-                                <textarea id="email2" class="textarea" name="email2" rows=5 placeholder="abc123@gmail.com"></textarea>
-                                <button id="submit" class="button" style="float:right">보내기</button>
+
+                                <form id=emailform method="POST" action="{% url 'emailResultImage' %}"
+                                    enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <textarea id="email2" class="textarea" name="email2" rows=5
+                                        placeholder="abc123@gmail.com"></textarea>
+                                    <input type="hidden" name="generatedImage" value="{{ generated_image_model.generated_image.url }}">
+                                
+                                    <button id="submit" class="button" style="float:right">보내기</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
+
             <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+            <script>
+                function DropFile(dropAreaId, fileListId) {
+                    let dropArea = document.getElementById(dropAreaId);
+                    let fileList = document.getElementById(fileListId);
+
+                    function preventDefaults(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
+                    function highlight(e) {
+                        preventDefaults(e);
+                        dropArea.classList.add("highlight");
+                    }
+
+                    function unhighlight(e) {
+                        preventDefaults(e);
+                        dropArea.classList.remove("highlight");
+                    }
+
+                    function handleDrop(e) {
+                        unhighlight(e);
+                        let dt = e.dataTransfer;
+                        let files = dt.files;
+
+                        handleFiles(files);
+
+                        const fileList = document.getElementById(fileListId);
+                        if (fileList) {
+                            fileList.scrollTo({ top: fileList.scrollHeight });
+                        }
+                    }
+
+                    function handleFiles(files) {
+                        files = [...files];
+                        // files.forEach(uploadFile);
+                        files.forEach(previewFile);
+                    }
+
+                    function previewFile(file) {
+                        console.log(file);
+                        renderFile(file);
+                    }
+
+                    function renderFile(file) {
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onloadend = function () {
+                            let img = dropArea.getElementsByClassName("preview")[0];
+                            img.src = reader.result;
+                            img.style.display = "block";
+                        };
+                    }
+
+                    dropArea.addEventListener("dragenter", highlight, false);
+                    dropArea.addEventListener("dragover", highlight, false);
+                    dropArea.addEventListener("dragleave", unhighlight, false);
+                    dropArea.addEventListener("drop", handleDrop, false);
+
+                    return {
+                        handleFiles
+                    };
+                }
+
+                const dropFile = new DropFile("drop-file", "files");
+                const dropFile2 = new DropFile("drop-file2", "files2");
+
+
+                //var selectedContentImageType = document.querySelector('input[name="content-image"]:checked').value;
+                //var selectedStyleImageType = document.querySelector('input[name="style-image"]:checked').value;
+                var uploadedContentImage = document.getElementById("chooseFile")
+                var uploadedStyleImage = document.getElementById("chooseFile2")
+                var RadioInputContentImage = document.getElementById("content_selected_image")
+                var RadioInputStyleImage = document.getElementById("style_selected_image")
+
+                //content-radio버튼 선택시
+                document.querySelectorAll('input[name="image-card"]').forEach(function (radio) {
+                    radio.addEventListener("change", function () {
+                        uploadedContentImage.value = "";
+                        console.log(uploadedContentImage.value)
+                        RadioInputContentImage.value = document.querySelector('input[name="image-card"]:checked').value;
+                        console.log(RadioInputContentImage.value)
+
+                        let dropArea = document.getElementById('drop-file');
+                        let img = dropArea.getElementsByClassName("preview")[0];
+                        img.src = "{% static 'img/' %}" + document.querySelector('input[name="image-card"]:checked').value;
+                        img.style.display = "block";
+                        // document.getElementById('dropboxImage1').src="{% static 'img/thum_s_01.jpeg' %}"
+                    });
+                });
+
+                //style-radio버튼 선택시
+                document.querySelectorAll('input[name="image-card2"]').forEach(function (radio) {
+                    radio.addEventListener("change", function () {
+                        uploadedStyleImage.value = "";
+                        console.log(uploadedStyleImage.value)
+                        RadioInputStyleImage.value = document.querySelector('input[name="image-card2"]:checked').value;
+                        console.log(RadioInputStyleImage.value)
+
+                        let dropArea = document.getElementById('drop-file2');
+                        let img = dropArea.getElementsByClassName("preview")[0];
+                        img.src = "{% static 'img/' %}" + document.querySelector('input[name="image-card2"]:checked').value;
+                        img.style.display = "block";
+                    });
+                });
+
+                uploadedContentImage.addEventListener("change", function () {
+                    // Uncheck radio buttons
+                    document.querySelectorAll('input[name="image-card"]').forEach(function (radio) {
+                        radio.checked = false;
+                    });
+                    if (RadioInputContentImage.value) {
+                        RadioInputContentImage.value = "";
+                        console.log(RadioInputContentImage.value)
+                    }
+                    console.log(uploadedContentImage.value)
+                });
+
+                uploadedStyleImage.addEventListener("change", function () {
+                    // Uncheck radio buttons
+                    document.querySelectorAll('input[name="image-card2"]').forEach(function (radio) {
+                        radio.checked = false;
+                    });
+                    if (RadioInputStyleImage.value) {
+                        RadioInputStyleImage.value = "";
+                        console.log(RadioInputStyleImage.value)
+                    }
+                    console.log(uploadedStyleImage.value)
+                });
+            </script>
 
         </section>
-            
+
         <footer>
             <div id="copyright">
-            <span>All contents Copyright 2023 by ImogenTeam. All rights reserved<br>
-            Contact mail : ran4088@sookmyung.ac.kr</span>
+                <span>All contents Copyright 2023 by ImogenTeam. All rights reserved<br>
+                    Contact mail : ran4088@sookmyung.ac.kr</span>
             </div>
         </footer>
 
-</div>
+    </div>
 </body>
+
 </html>
