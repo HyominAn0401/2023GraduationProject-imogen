@@ -12,18 +12,22 @@ import torchvision.models as models
 import torch.optim as optim
 from django.conf import settings
 from django.http import JsonResponse
-from django.http import HttpResponse
+import urllib.request
+from django.views.decorators.csrf import csrf_exempt
+import ssl
+import base64
 
-# 결과 이미지 보내는 함수
+
+# 결과 이미지 보내는 함수 (styleTransfer)
 def emailResultImage(request):
-    print(settings.BASE_DIR)
-    a = request.POST.get('generatedImage')
-    print(a)
+    a = request.POST.get('generatedImage','')
     a = a[1:]
     generated_image_path1 = os.path.join(settings.BASE_DIR, a)
     print(generated_image_path1)
-    email_address= request.POST.get('email2')
+    
+    email_address= request.POST.get('email2','')
     print(email_address)
+
     email = EmailMessage(
         'StyleTransfer 완료',
         '첨부된 이미지를 확인해주세요.',
@@ -34,7 +38,75 @@ def emailResultImage(request):
     email.attach_file(generated_image_path1)
     print("Suceed attaching the image")
     email.send()
-    return HttpResponse("이메일 전송 완료")
+
+    response_data ={
+        'message': f'{email_address}로 이메일 전송 완료'
+    }
+    return JsonResponse(response_data)
+
+# 이미지 url 받아와서 이메일 전송하는 함수(text2image)
+def emailText2Img(request):
+    path = request.POST.get('generatedImage','')
+    print(path)
+    # a = a[1:]
+    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    ssl_context.verify_mode = ssl.CERT_NONE
+    try:
+        response = urllib.request.urlopen(path,context=ssl_context)
+        image_data = response.read()
+        
+        email_address= request.POST.get('email2','')
+        print(email_address)
+
+        email = EmailMessage(
+            'StyleTransfer 완료',
+            '첨부된 이미지를 확인해주세요.',
+            settings.EMAIL_HOST_USER,
+            [email_address],
+        )
+        print("Succeed email2")
+        email.attach('image.jpg', image_data, 'image/jpeg')
+        # email.attach_file(generated_image_path1)
+        print("Suceed attaching the image")
+        email.send()
+
+        response_data ={
+            'message': f'{email_address}로 이메일 전송 완료'
+        }
+        return JsonResponse(response_data)
+    except Exception as e:
+        return HttpResponse(f'오류 발생: {str(e)}', status=500)
+
+# 편집된 이미지 이메일 보내기 (imageEditor.html)
+def emailEditedImage(request):
+    print(request)
+    email_address= request.POST.get('email2','')
+    print(email_address)
+    # a = a[1:]
+    # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    # ssl_context.verify_mode = ssl.CERT_NONE
+    imageData = request.POST.get('imageData', "")
+    print('이건 이미지데이터', image_data)
+    # 이미지 데이터 디코딩
+    image_data = base64.b64decode(imageData).split(",")[1]
+    
+
+    email = EmailMessage(
+        'StyleTransfer 완료',
+        '첨부된 이미지를 확인해주세요.',
+        settings.EMAIL_HOST_USER,
+        [email_address],
+    )
+    print("Succeed email2")
+    email.attach('image.jpg', image_data, 'image/jpeg')
+    # email.attach_file(generated_image_path1)
+    print("Suceed attaching the image")
+    email.send()
+
+    response_data ={
+        'message': f'{email_address}로 이메일 전송 완료'
+    }
+    return JsonResponse(response_data)
 
 
 
@@ -104,6 +176,7 @@ async def upload_image(request):
 
         #폼 데이터에서 이메일 주소
         email_address = request.POST.get('email')
+        print(email_address)
 
         # 이미지 저장 비동기 함수를 직접 await로 호출
         user_image = await save_user_image(content_image, style_image,content_selected_image_path, style_selected_image_path)

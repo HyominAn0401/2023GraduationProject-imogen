@@ -13,5 +13,7 @@ urlpatterns = [
     path('index/', views.index, name="index"),
 
     path('emailResultImage/', views.emailResultImage, name='emailResultImage'),
+    path('emailText2Img/', views.emailText2Img, name='emailText2Img'),
+    path('emailEditedImage/', views.emailEditedImage, name='emailEditedImage'),
     # 다른 URL 패턴들을 여기에 추가할 수 있습니다.
 ]

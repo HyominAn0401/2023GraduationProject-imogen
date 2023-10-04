@@ -182,8 +182,9 @@
                                     {% csrf_token %}
                                     <textarea id="email2" class="textarea" name="email2" rows=5
                                         placeholder="abc123@gmail.com"></textarea>
-                                    <input type="hidden" name="generatedImage" value="{{ generated_image_model.generated_image.url }}">
-                                
+                                    <input type="hidden" id="generatedImage" name="generatedImage"
+                                        value="{{ generated_image_model.generated_image.url }}">
+
                                     <button id="submit" class="button" style="float:right">보내기</button>
                                 </form>
                             </div>
@@ -195,6 +196,60 @@
 
             <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
             <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var emailForm = document.getElementById("emailform");
+
+                    emailForm.addEventListener("submit", function (e) {
+                        e.preventDefault(); // 폼 제출 동작 막음
+
+                        var email2 = document.getElementById("email2").value;
+                        console.log(document.getElementById("email2").value);
+                        var generatedImage = document.getElementById("generatedImage").value;
+                        console.log(document.getElementById("generatedImage").value)
+
+                        // POST 요청
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "{% url 'emailResultImage' %}", true);
+                        // CSRF 토큰을 헤더에 설정
+                        xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        
+
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    var response = JSON.parse(xhr.responseText);
+                                    alert(response.message);
+                                } else {
+                                    alert('오류 발생');
+                                }
+                            }
+                        };
+
+                        var data = "email2=" + encodeURIComponent(email2) + "&generatedImage=" + encodeURIComponent(generatedImage);
+                        console.log(data)
+                        xhr.send(data);
+                        console.log('성공')
+                    });
+                });
+                // CSRF 토큰을 가져오는 함수
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie !== "") {
+                        var cookies = document.cookie.split(";");
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = cookies[i].trim();
+                            // csrfmiddlewaretoken 이름의 쿠키에서 토큰 값을 찾음
+                            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+            
+
                 function DropFile(dropAreaId, fileListId) {
                     let dropArea = document.getElementById(dropAreaId);
                     let fileList = document.getElementById(fileListId);

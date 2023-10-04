@@ -1,151 +1,161 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>ImaGen</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
-          </style>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> <!--외부스타일시트 연결-->
-    </head>
-    <body>
-        <nav>
-            <div class="wrapper">
-                <h1 id="logo"><a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Imo<span style="color:#B4C8BB">gen</span></a></h1>
-                <ul class="menu">
-                    <li><a href="{% url 'stylegen' %}">StyleTransfer</a></li>
-                    <li><a href="{% url 'text2img' %}">Text2Imagen</a></li>
-                    <li><a href="{% url 'imageEdit' %}">ImageEdit</a></li>
-                </ul>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ImaGen</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" /> <!--외부스타일시트 연결-->
+</head>
+
+<body>
+    <nav>
+        <div class="wrapper">
+            <h1 id="logo"><a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Imo<span
+                        style="color:#B4C8BB">gen</span></a></h1>
+            <ul class="menu">
+                <li><a href="{% url 'stylegen' %}">StyleTransfer</a></li>
+                <li><a href="{% url 'text2img' %}">Text2Imagen</a></li>
+                <li><a href="{% url 'imageEdit' %}">ImageEdit</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <section id="aboutme">
+            <div>
+                <h2 class="title">Ima<span style="color:#B4C8BB">Gen</span></h2>
+                <p class="article">
+                    ImaGen는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br><br>
+
+                    원하는 배경화면이 어떤 모습인지 말해주세요! Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.<br><br>
+
+                    프롬프트를 입력하고 생성 버튼을 클릭하세요. 이미지를 생성하는 데 특별한 코드가 필요하지 않습니다. 지금 당장 놀라운 예술 작품을 만들어보세요!<br><br>
+                </p>
+                <div style="text-align: center;">
+                    <button class="button" type="button" onclick="goToScroll('button')">Get Started</button>
+                </div>
             </div>
-        </nav>
-        <div class="wrapper">            
-            <section id="aboutme">
-                <div>
-                <h2 class = "title">Ima<span style="color:#B4C8BB">Gen</span></h2>
-                    <p class="article" >
-                        ImaGen는 텍스트 입력에 따라 아름답고 예술적인 배경화면을 만들 수 있도록 지원하는 text to image 모델입니다.<br><br>
-                        
-                        원하는 배경화면이 어떤 모습인지 말해주세요! Imagen이 단 몇 초 안에 당신의 상상을 실현시켜 드릴겁니다.<br><br>
-    
-                        프롬프트를 입력하고 생성 버튼을 클릭하세요. 이미지를 생성하는 데 특별한 코드가 필요하지 않습니다. 지금 당장 놀라운 예술 작품을 만들어보세요!<br><br>
-                    </p>
-                    <div style="text-align: center;">
-                        <button class="button" type="button" onclick= "goToScroll('button')">Get Started</button>
+
+        </section>
+
+        <section id="aboutme" class="input-container">
+            <div>
+                <h2 class="comment-head">Prompt</h2>
+                <textarea id="prompt" class="textarea" name="prompt" rows=5
+                    placeholder="예: 빨간 집에 사는 귀여운 고양이"></textarea>
+            </div>
+            <div>
+                <h2 class="comment-head">Negative Prompt</h2>
+                <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5
+                    placeholder="예: 더러운, 무서운"></textarea>
+            </div>
+
+
+            <div id="submit-icon">
+                <button class="button-generate" type="submit" onclick="">Generate!</button>
+            </div>
+            <div id="submit"></div>
+        </section>
+
+
+
+        <section id="aboutme" class="image-section">
+            <div class="result-image" id="result-section" style="display: none;">
+                <h2 class="title2">Result</h2>
+                <!-- 로딩창 image src를 gif로 -->
+
+                <div id="mapcontents">
+                    <img src="" id="result-image" style="width: 100%;">
+                    <div id="buttons"
+                        style="display:flex; width: 100%; justify-content: space-between; margin-top: 20px;">
+                        <div id="row">
+                            <a href="" download="image" id="downloadLink"><button id="downloadButton"
+                                    class="button">Download Image</button></a>
+                            <button id="toggleButton" class="button">Share Image</button>
+                        </div>
+                        <div></div>
+                        <button id="imageEditButton" class="button3">Edit Image</button>
                     </div>
                 </div>
+                <div id="popups">
+                    <div class="popup" id="popup-1">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <div class="close-btn" onclick="togglePopup('popup-1')"></div>
+                            <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
+                            <form id=emailform method="POST" action="{% url 'emailText2Img' %}"
+                                enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <textarea id="email2" class="textarea" name="email2" rows=5
+                                    placeholder="abc123@gmail.com"></textarea>
+                                <!-- <input type="hidden" id="generatedImage" name="generatedImage"
+                                        value="{{ generated_image_model.generated_image.url }}"> -->
 
-            </section>
-            
-            <section id="aboutme" class="input-container">
-                <div>
-                    <h2 class="comment-head">Prompt</h2>
-                    <textarea id="prompt" class="textarea" name="prompt" rows=5 placeholder="예: 빨간 집에 사는 귀여운 고양이"></textarea>
-                </div>
-                <div>
-                    <h2 class="comment-head">Negative Prompt</h2>
-                    <textarea id="negative-prompt" class="textarea" name="negative-prompt" rows=5 placeholder="예: 더러운, 무서운"></textarea>
-                </div>
-                
-                
-                <div id="submit-icon">
-                    <button class="button-generate" type="submit" onclick="">Generate!</button>
-                </div>
-                <div id ="submit"></div>
-            </section>
-
-
-
-            <section id="aboutme" class="image-section">
-                <div class="result-image" id="result-section" style="display: none;">
-                    <h2 class = "title2">Result</h2>
-                    <!-- 로딩창 image src를 gif로 -->
-                    
-                    <div id="mapcontents">
-                        <img src="" id="result-image" style="width: 100%;">
-                        <div id="buttons" style="display:flex; width: 100%; justify-content: space-between; margin-top: 20px;">
-                            <div id="row">
-                                <a href="" download="image" id="downloadLink"><button id="downloadButton" class="button">Download Image</button></a>
-                                <button id="toggleButton" class="button">Share Image</button>
-                            </div>
-                            <div></div>
-                                <button id="imageEditButton" class="button3">Edit Image</button>
-                            </div>
-                        </div>
-                        <div id="popups">
-                            <div class="popup" id="popup-1">
-                                <div class="overlay"></div>
-                                <div class="content">
-                                    <div class="close-btn" onclick="togglePopup('popup-1')"></div>
-                                    <h2 class="comment-head" style="margin-top:100px">Write an Email Address</h2>
-                                    <textarea id="email2" class="textarea" name="email2" rows=5 placeholder="abc123@gmail.com"></textarea>
-                                    <button id="submit" class="button" style="float:right">보내기</button>
-                                </div>
-                            </div>
+                                <button id="submit" class="button" style="float:right">보내기</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </section>
-            <script src="{% static 'js/apikey.js' %}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
-            <script type = "text/javascript" src="{% static 'js/text2image.js' %}">
-                
-
-
-/*
-                function warnEmpty(){
-                    alert("Enter a Input");
-                }
-                function dateToString(date){
-                    //const dateString=date
-                    const dateString=date.toISOString();
-                    const dateToString=dateString.substring(0,10) + " " + dateString.substring(11,19);
-                    return dateToString;
-                }
-
-                function submitComment(){
-                    const newcommentEL = document.getElementById("new-comment");
-                    const newcomment = newcommentEL.value.trim(); //양끝에서 공백을 삭제
-
-                    if(newcomment) {
-                        const tzoffset = new Date().getTimezoneOffset()*60000;
-                        const dateEL = document.createElement('div');//div 요소 만들고 dateEL에 저장
-                        dateEL.classList.add("comment-date");
-                        var a = new Date(Date.now()-tzoffset);
-                        const dateString = dateToString(a);
-                        dateEL.innerText = dateString;
-
-                        const contentEL=document.createElement('div');
-                        contentEL.classList.add('comment-content');
-                        contentEL.innerText=newcomment;
-
-                        const commentEL = document.createElement('div');
-                        commentEL.classList.add('comment-row');
-                        commentEL.appendChild(dateEL);
-                        commentEL.appendChild(contentEL);
-                        
-
-                        document.getElementById('comments').appendChild(commentEL);
-                        newcommentEL.value="";
-
-                        const countEL=document.getElementById("comments-count");
-                        const count = countEL.innerText;
-                        countEL.innerText = parseInt(count) + 1;
-                    }
-                    else warnEmpty();
-                }
-*/
-            </script>
-            
-                <footer>
-                    <div id="copyright">
-                    <span>All contents Copyright 2021 by Chaeran Yoo. All rights reserved<br>
-                    Contact mail : ran4088@sookmyung.ac.kr</span>
-                    </div>
-                </footer>
             </div>
     </div>
-    </body>
+    </section>
+    <script src="{% static 'js/apikey.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.0/cropper.js"></script>
+    <script type="text/javascript" src="{% static 'js/text2image.js' %}"></script>
+    <script>
+        /*share image*/
+        var generatedImage = document.getElementById("result-image").src;
+        document.addEventListener("DOMContentLoaded", function () {
+            var emailForm = document.getElementById("emailform");
+
+            emailForm.addEventListener("submit", function (e) {
+                e.preventDefault(); // 폼 제출 동작 막음
+
+                var email2 = document.getElementById("email2").value;
+                console.log(document.getElementById("email2").value);
+                var generatedImage = document.getElementById("result-image").src;
+                console.log(generatedImage)
+
+                // POST 요청
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "{% url 'emailText2Img' %}", true);
+                // CSRF 토큰을 헤더에 설정
+                xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            var response = JSON.parse(xhr.responseText);
+                            alert(response.message);
+                        } else {
+                            alert('오류 발생');
+                        }
+                    }
+                };
+
+                var data = "email2=" + encodeURIComponent(email2) + "&generatedImage=" + encodeURIComponent(generatedImage);
+                console.log(data)
+                xhr.send(data);
+                console.log('성공')
+            });
+        });
+
+    </script>
+
+    <footer>
+        <div id="copyright">
+            <span>All contents Copyright 2021 by Chaeran Yoo. All rights reserved<br>
+                Contact mail : ran4088@sookmyung.ac.kr</span>
+        </div>
+    </footer>
+    </div>
+    </div>
+</body>
+
 </html>
