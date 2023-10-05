@@ -86,9 +86,13 @@ def emailEditedImage(request):
     # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     # ssl_context.verify_mode = ssl.CERT_NONE
     imageData = request.POST.get('imageData', "")
-    print('이건 이미지데이터', image_data)
+    print('111111')
+    print('이건 이미지데이터', imageData)
+
+    # text_byte=imageData.encode('utf-8')
+    # print(type(text_byte))
     # 이미지 데이터 디코딩
-    image_data = base64.b64decode(imageData).split(",")[1]
+    image_data = base64.b64decode(imageData)
     
 
     email = EmailMessage(
